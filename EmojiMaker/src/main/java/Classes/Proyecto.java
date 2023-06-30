@@ -10,7 +10,9 @@ import java.io.Serializable;
  *
  * @author USUARIO
  */
-public class Proyecto  implements Serializable{
+
+public class Proyecto implements Serializable {
+
     String proName;
     Emoji content;
 

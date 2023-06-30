@@ -11,7 +11,9 @@ import java.util.Iterator;
  *
  * @author USUARIO
  */
+
 public class ArrayList<E> implements Serializable,List<E>, Iterable<E>{
+
 
        private E[] elements;
     private int MAX_SIZE = 100;

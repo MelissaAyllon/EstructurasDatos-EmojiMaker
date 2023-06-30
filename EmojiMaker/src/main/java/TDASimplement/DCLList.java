@@ -4,6 +4,7 @@
  */
 package TDASimplement;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Iterator;
  * @author USUARIO
  * @param <E>
  */
-public class DCLList<E> implements List<E>, Iterable<E>{
+public class DCLList<E> implements List<E>, Iterable<E>, Serializable{
 
     private NodeDCLL<E> last;
     

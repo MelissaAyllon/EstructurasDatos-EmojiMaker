@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
  *
  * @author USUARIO
  */
+
 public class Emoji implements Serializable {
     private String eyes_url;
     private String mouth_url;
@@ -20,6 +21,7 @@ public class Emoji implements Serializable {
     private String  accesory; 
     private String portada;
     public Emoji(String eyes_url, String mouth_url, String brows_url, String face_url, String portada) {
+
         this.eyes_url = eyes_url;
         this.mouth_url = mouth_url;
         this.brows_url = brows_url;

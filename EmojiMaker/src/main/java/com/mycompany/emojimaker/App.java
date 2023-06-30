@@ -1,5 +1,6 @@
 package com.mycompany.emojimaker;
 
+
 import Classes.Usuario;
 import TDASimplement.ArrayList;
 import java.io.FileInputStream;
@@ -24,8 +25,15 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+
 //        Usuario uprueba=new Usuario("dtruiz", "dtruiz");
 //        usuarios.addLast(uprueba);
+
+//        Datos.guardarDatos("src/main/resources/usuarios.ser", Datos.escribirUsuarios());
+//        //Se escriben los datos del archivo al programa
+//        usuarios = Datos.escribirDatos("src/main/resources/usuarios.ser");
+        
+
         scene = new Scene(loadFXML("welcomeWindow"), 700, 600);
         stage.setScene(scene);
         stage.show();
@@ -68,4 +76,10 @@ public static void serializarEstadoActual(ArrayList<Usuario> arrayUsuarios) {
     }
     return null;
   }
+    public static Scene getScene() {
+        return scene;
+    }
+    
 }
+
+    

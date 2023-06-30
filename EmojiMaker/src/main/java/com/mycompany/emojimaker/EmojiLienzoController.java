@@ -204,7 +204,7 @@ public class EmojiLienzoController implements Initializable {
                 App.usuarioSeleccionado.getProyectos().addLast(proyecton);
                 
                 App.setRoot("galleryWindow");
-                App.serializarEstadoActual(App.usuarios);
+//                App.serializarEstadoActual(App.usuarios);
                Stage stage = (Stage) this.btnGuardar.getScene().getWindow();
                 stage.close();
             } catch (IOException ex) {

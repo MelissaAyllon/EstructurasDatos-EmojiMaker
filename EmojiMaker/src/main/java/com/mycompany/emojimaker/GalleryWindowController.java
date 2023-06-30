@@ -4,6 +4,7 @@
  */
 package com.mycompany.emojimaker;
 
+
 import Classes.Emoji;
 import Classes.Proyecto;
 import TDASimplement.ArrayList;
@@ -63,8 +64,10 @@ public class GalleryWindowController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         llenarContenedor();
-         
-        
+        App.getScene().getWindow().setOnCloseRequest(eh->{
+            App.serializarEstadoActual(App.usuarios);
+        });
+
     }    
     
 
