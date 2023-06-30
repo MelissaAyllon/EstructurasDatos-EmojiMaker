@@ -4,6 +4,7 @@
  */
 package com.mycompany.emojimaker;
 
+import Classes.Datos;
 import Classes.Emoji;
 import Classes.Proyecto;
 import TDASimplement.ArrayList;
@@ -60,7 +61,11 @@ public class GalleryWindowController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         llenarContenedor();
-        
+        //Al cerrar la ventana de gallery se serializa todo de nuevo para que quede guardado
+        //No se pueden serializar los objetos imageview que son las partes del emoji+++++++===++++===
+        App.getScene().getWindow().setOnCloseRequest(eh->{
+            Datos.guardarDatos("src/main/resources/usuarios.ser",App.usuarios);
+        });
     }    
     
 

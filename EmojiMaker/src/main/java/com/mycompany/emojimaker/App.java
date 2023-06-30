@@ -1,5 +1,6 @@
 package com.mycompany.emojimaker;
 
+import Classes.Datos;
 import Classes.Usuario;
 import TDASimplement.ArrayList;
 import javafx.application.Application;
@@ -20,8 +21,9 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Usuario uprueba=new Usuario("dtruiz", "dtruiz");
-        usuarios.addLast(uprueba);
+        //Se escriben los datos del archivo al programa
+        usuarios = Datos.escribirDatos("src/main/resources/usuarios.ser");
+        
         scene = new Scene(loadFXML("welcomeWindow"), 700, 600);
         stage.setScene(scene);
         stage.show();
@@ -40,4 +42,9 @@ public class App extends Application {
         launch();
     }
 
+    public static Scene getScene() {
+        return scene;
+    }
+
+    
 }

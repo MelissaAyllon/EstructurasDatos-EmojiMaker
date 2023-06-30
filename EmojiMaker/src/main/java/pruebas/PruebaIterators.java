@@ -4,6 +4,7 @@
  */
 package pruebas;
 
+import Classes.Datos;
 import TDASimplement.ArrayList;
 
 /**
@@ -12,13 +13,16 @@ import TDASimplement.ArrayList;
  */
 public class PruebaIterators {
     public static void main(String[] args) {
-        ArrayList<Integer> enteros = new ArrayList<>();
-        enteros.addLast(1);
-        enteros.addLast(2);
+        ArrayList<String> strings = new ArrayList<>();
+        strings.addLast("A");
+        strings.addLast("b");
         
-
-        for(Integer entero: enteros){
-            System.out.println(entero);
+        Datos.guardarDatos("src/main/resources/objetos.ser", strings);
+        
+        
+        ArrayList<String> string = Datos.escribirDatos("src/main/resources/objetos.ser");
+        for(String st: string){
+            System.out.println(st);
         }
     }
     

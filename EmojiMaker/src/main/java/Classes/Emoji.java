@@ -4,6 +4,7 @@
  */
 package Classes;
 
+import java.io.Serializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -11,7 +12,7 @@ import javafx.scene.image.ImageView;
  *
  * @author USUARIO
  */
-public class Emoji {
+public class Emoji implements Serializable{
     private ImageView eyes_url;
     private ImageView  mouth_url;
     private ImageView  brows_url;

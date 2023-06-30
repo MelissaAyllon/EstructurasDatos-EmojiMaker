@@ -4,13 +4,14 @@
  */
 package TDASimplement;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
 /**
  *
  * @author USUARIO
  */
-public class ArrayList<E> implements List<E>, Iterable<E>{
+public class ArrayList<E> implements List<E>, Iterable<E>, Serializable{
 
        private E[] elements;
     private int MAX_SIZE = 100;
