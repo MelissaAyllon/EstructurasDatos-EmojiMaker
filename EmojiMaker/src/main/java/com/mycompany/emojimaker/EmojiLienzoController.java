@@ -44,17 +44,22 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import pruebas.Main;
@@ -116,6 +121,7 @@ public class EmojiLienzoController implements Initializable {
     private NodeDCLL<ImageView> nodoF;
     private ImageView ivSelected;
     private DCLList<ImageView> selectedList;
+    private String nomProyect="";
     
     
     ObservableList<String> options = FXCollections.observableArrayList(
@@ -149,37 +155,60 @@ public class EmojiLienzoController implements Initializable {
         });
         this.deleteFeatButton.setOnAction(eh->{
             deleteFeature();});
-        
+        this.btnExportar.setOnAction(e->{
+            
+            });
         //guardar proyecto
         this.btnGuardar.setOnAction(eh->{
-            //Pide el nombre del proyecto
-            //crea un diálogo de entrada de texto
-            TextInputDialog dialog = new TextInputDialog();
-            dialog.setTitle("Proyecto Nuevo");
-            dialog.setHeaderText("Ingresa el nombre de tu proyecto");
-            dialog.setContentText("Proyecto:");
-            dialog.showAndWait().ifPresent(texto -> {
-                //convierte la el emoji en imagen png y devuelve la imagen
-                Image imagen = convertAnchorPaneToImage(emojiBlock,texto);
+            try {
+                //PRIMERO NECESIITO QUE EL USUARIO DE UN NOMBRE AL PROYECTO//
                 
-                //Primero crear proyecto 
+                Label l=new Label("Ingrese nombre de proyecto:");
+                TextField tf=new TextField();
+                Button b=new Button("OK");
                 
-                Proyecto proy =crearProyecto(texto,imagen);
-                App.usuarioSeleccionado.getProyectos().addLast(proy);
-               
-                for (Proyecto p: App.usuarioSeleccionado.getProyectos()){
-                    System.out.println(p.getContent().getPortada().toString());
-                }
-                try {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("galleryWindow.fxml"));
-            Parent p= loader.load();
-            GalleryWindowController controller=loader.getController();
-            controller.llenarContenedor();
+                VBox contenedorScena=new VBox();
+                VBox.setMargin(b, new Insets(15, 15, 15, 15));
+                VBox.setMargin(l, new Insets(15, 15, 15, 15));
+                VBox.setMargin(tf, new Insets(15, 15, 15, 15));
+                contenedorScena.setSpacing(20);
+                contenedorScena.getChildren().addAll(l,tf,b);
+                
+                Scene s=new Scene(contenedorScena);
+                Stage stg=new Stage();
+                stg.setHeight(250);
+                stg.setWidth(250);
+                b.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent t) {
+                        if (tf.getText().isEmpty()){
+                            Alert a=new Alert(Alert.AlertType.ERROR);
+                            a.setContentText("Ingrese un nombre para su proyecto");
+                            a.showAndWait();
+                        }else{
+                            nomProyect=tf.getText();
+                            stg.close();
+                        }
+                    }
+                });
+                
+                stg.setScene(s);
+                stg.showAndWait();
+                //TODO EL CODIGO ARRIBA SOLO ME DEVUELVE UN NOMBRE PARA MI PROYECTO//
+                //TENIENDO EL NOMBRE DEBO CREAR EL PROYECTO (PORTADA)//
+                Image portada=convertAnchorPaneToImage(emojiBlock, nomProyect,"src\\main\\resources\\ImagenesProyectos\\");
+                Emoji e=new Emoji(emojiEyes, emojiMouth, emojiBrows, emojiFace, portada);
+                Proyecto proyecton=new Proyecto(nomProyect, e);
+                App.usuarioSeleccionado.getProyectos().addLast(proyecton);
+                
+                App.setRoot("galleryWindow");
+               Stage stage = (Stage) this.btnGuardar.getScene().getWindow();
+                stage.close();
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
             
-        } catch (Exception ex) {
-                    System.out.println(ex.getMessage());
-        }
-            });
+            
         });
     }
     //meotod que carga panel y setean atributos iniciales 
@@ -384,7 +413,7 @@ public class EmojiLienzoController implements Initializable {
     
       } 
    //metodo que convierte el contenedor del emoji en imagen
-   public static Image convertAnchorPaneToImage(AnchorPane anchorPane,String nombreProyecto) {
+   public static Image convertAnchorPaneToImage(AnchorPane anchorPane,String nombreProyecto,String ruta) {
     WritableImage snapshot = anchorPane.snapshot(new SnapshotParameters(), null);
     BufferedImage bufferedImage = SwingFXUtils.fromFXImage(snapshot, null);
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -394,10 +423,10 @@ public class EmojiLienzoController implements Initializable {
         ByteArrayInputStream inputStream = new ByteArrayInputStream(imageData);
         
         //Directorio donde se guardan las imagenes
-        String resourcePath = "src\\main\\resources\\ImagenesProyectos\\";
+        
         
         //Aqui habria que siempre ponerle un nombre unico a cada imagen
-        String imagePath = resourcePath + nombreProyecto + ".png";
+        String imagePath = ruta + nombreProyecto + ".png";
         
         //lo guardamos en un archivo que pueda ser enviado cuando se escriba la imagen
         File outputFile = new File(imagePath);

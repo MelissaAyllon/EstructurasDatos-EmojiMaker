@@ -17,7 +17,7 @@ public class Emoji {
     private ImageView  brows_url;
     private ImageView  face_url;
     private ImageView  accesory; 
-    private Image portada=null;
+    private Image portada;
     public Emoji(ImageView eyes_url, ImageView mouth_url, ImageView brows_url, ImageView face_url, Image portada) {
         this.eyes_url = eyes_url;
         this.mouth_url = mouth_url;

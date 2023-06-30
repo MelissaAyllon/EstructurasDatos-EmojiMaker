@@ -86,17 +86,18 @@ public class GalleryWindowController implements Initializable {
   
 
     public void llenarContenedor(){
-       
-        //deberia recorrer la lista de proyectos del usuario seleccionado y mostrarlos 
-        //Al dar click a proyecto seleccionado deberia abrrse el controller del lienzo y editar ESE proyecto 
-
-            //1 llenar el contenedor(FLOWPANE) con los proyectos que tiene
-            //tenemos un arraylist con proyecto, ahora debemos iterar 
-           proyectosPane.getChildren().clear();
-           for (Proyecto p: userProyects){
-                Label l=new Label();
-                l.setText(p.getProName());
-                proyectosPane.getChildren().add(l);
+            proyectosPane.getChildren().clear();
+            for (Proyecto p: App.usuarioSeleccionado.getProyectos()){
+               ImageView iv=new ImageView();
+               Image image=p.getContent().getPortada();
+               iv.setImage(image);
+               iv.setFitHeight(80);
+               iv.setFitWidth(80);
+              
+               proyectosPane.setHgap(10);
+               proyectosPane.setVgap(10);
+              
+               proyectosPane.getChildren().add(iv);
             }
             
         }
