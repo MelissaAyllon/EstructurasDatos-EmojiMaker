@@ -93,10 +93,20 @@ public class GalleryWindowController implements Initializable {
             //1 llenar el contenedor(FLOWPANE) con los proyectos que tiene
             //tenemos un arraylist con proyecto, ahora debemos iterar 
            proyectosPane.getChildren().clear();
+           System.out.println("hola");
            for (Proyecto p: userProyects){
                 Label l=new Label();
                 l.setText(p.getProName());
-                proyectosPane.getChildren().add(l);
+                ImageView imagen = new ImageView(p.getContent().getPortada());
+                imagen.setFitHeight(80);
+                imagen.setFitWidth(80);
+                
+//                System.out.println("d");
+//                System.out.println(p.getContent().getPortada());
+//                proyectosPane.getChildren().add(l);
+                proyectosPane.getChildren().add(imagen);
+                
+                //vamos a poner
             }
             
         }

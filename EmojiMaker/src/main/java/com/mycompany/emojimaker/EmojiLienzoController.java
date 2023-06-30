@@ -168,13 +168,21 @@ public class EmojiLienzoController implements Initializable {
                 App.usuarioSeleccionado.getProyectos().addLast(proy);
                
                 for (Proyecto p: App.usuarioSeleccionado.getProyectos()){
-                    System.out.println(p.getContent().getPortada().toString());
+//                    System.out.println(p.getContent().getPortada().toString());
                 }
                 try {
+            //Este creo que es para llenar de nuevo el contenedor con el nuevo proyecto.
             FXMLLoader loader=new FXMLLoader(getClass().getResource("galleryWindow.fxml"));
             Parent p= loader.load();
             GalleryWindowController controller=loader.getController();
-            controller.llenarContenedor();
+//            controller.llenarContenedor();
+            //esto es para ver que si sale la imagen lo correcto seria recargar el anterior gallerywindow
+            Scene s=new Scene(p,700,600);
+            Stage st=new Stage();
+           
+            st.setScene(s);
+            
+            st.showAndWait();
             
         } catch (Exception ex) {
                     System.out.println(ex.getMessage());
@@ -419,10 +427,10 @@ public class EmojiLienzoController implements Initializable {
        ImageView cejasUrl = this.getEmojiBrows();
        ImageView caraUrl = this.getEmojiFace();
        String accUrl; //esta para el accesorio
-       System.out.println(this.getEmojiEyes().toString());
-       System.out.println(this.getEmojiMouth().toString());
-       System.out.println(this.getEmojiBrows().toString());
-       System.out.println(this.getEmojiFace().toString());
+//       System.out.println(this.getEmojiEyes().toString());
+//       System.out.println(this.getEmojiMouth().toString());
+//       System.out.println(this.getEmojiBrows().toString());
+//       System.out.println(this.getEmojiFace().toString());
        Emoji emoji = new Emoji(ojosUrl,bocaUrl,cejasUrl,caraUrl,portada);
        //Creo el proyecto
        Proyecto proy = new Proyecto(nombreProyecto,emoji);
