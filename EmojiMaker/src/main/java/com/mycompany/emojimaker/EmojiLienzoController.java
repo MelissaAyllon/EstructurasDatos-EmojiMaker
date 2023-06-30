@@ -56,6 +56,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.FlowPane;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
@@ -72,6 +73,7 @@ import static pruebas.Main.cargar;
  */
 
 public class EmojiLienzoController implements Initializable {
+    
     @FXML 
     
     private HBox conBtn_Menu;
@@ -113,6 +115,9 @@ public class EmojiLienzoController implements Initializable {
     private FlowPane contenedorScroll;
      @FXML
     private Button newFtButton;
+     @FXML
+     private TextField titulotxt;
+   
     private DCLList<ImageView> ojos=new DCLList<>();
     private DCLList<ImageView> bocas=new DCLList<>();
     private DCLList<ImageView> caras=new DCLList<>();
@@ -160,61 +165,58 @@ public class EmojiLienzoController implements Initializable {
             });
         //guardar proyecto
         this.btnGuardar.setOnAction(eh->{
-            try {
-                //PRIMERO NECESIITO QUE EL USUARIO DE UN NOMBRE AL PROYECTO//
-                
-                Label l=new Label("Ingrese nombre de proyecto:");
-                TextField tf=new TextField();
-                Button b=new Button("OK");
-                
-
-                VBox contenedorScena=new VBox();
-                VBox.setMargin(b, new Insets(15, 15, 15, 15));
-                VBox.setMargin(l, new Insets(15, 15, 15, 15));
-                VBox.setMargin(tf, new Insets(15, 15, 15, 15));
-                contenedorScena.setSpacing(20);
-                contenedorScena.getChildren().addAll(l,tf,b);
-                
-                Scene s=new Scene(contenedorScena);
-                Stage stg=new Stage();
-                stg.setHeight(250);
-                stg.setWidth(250);
-                b.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent t) {
-                        if (tf.getText().isEmpty()){
-                            Alert a=new Alert(Alert.AlertType.ERROR);
-                            a.setContentText("Ingrese un nombre para su proyecto");
-                            a.showAndWait();
-                        }else{
-                            nomProyect=tf.getText();
-                            stg.close();
-                        }
-                    }
-                });
-                
-                stg.setScene(s);
-                stg.showAndWait();
-                //TODO EL CODIGO ARRIBA SOLO ME DEVUELVE UN NOMBRE PARA MI PROYECTO//
-                //TENIENDO EL NOMBRE DEBO CREAR EL PROYECTO (PORTADA)//
-                Image portada=new Image("file:"+convertAnchorPaneToImage(emojiBlock, nomProyect,"src\\main\\resources\\ImagenesProyectos\\"));
+              if (this.titulotxt.getText().isEmpty()){
+                     Alert a=new Alert(Alert.AlertType.ERROR);
+                     a.setContentText("Debe ingresar un titulo");
+                     a.showAndWait();
+                     eh.consume();
+                   }else{
+                  Image portada=new Image("file:"+convertAnchorPaneToImage(emojiBlock, titulotxt.getText(),"src\\main\\resources\\ImagenesProyectos\\"));
                 System.out.println(portada.getUrl());
                 Emoji e=new Emoji(emojiEyes.getImage().getUrl(), emojiMouth.getImage().getUrl(), emojiBrows.getImage().getUrl(), emojiFace.getImage().getUrl(), portada.getUrl());
-                Proyecto proyecton=new Proyecto(nomProyect, e);
+                Proyecto proyecton=new Proyecto(titulotxt.getText(), e);
+               
                 App.usuarioSeleccionado.getProyectos().addLast(proyecton);
-                
+                 try {
                 App.setRoot("galleryWindow");
-//                App.serializarEstadoActual(App.usuarios);
-               Stage stage = (Stage) this.btnGuardar.getScene().getWindow();
-                stage.close();
             } catch (IOException ex) {
-                System.out.println(ex.getMessage());
+                ex.printStackTrace();
             }
+                Stage stage = (Stage) this.btnGuardar.getScene().getWindow();
+                stage.close();
             
+              }
+           
+        });
+        this.btnExportar.setOnAction(eh->{
+            if (titulotxt.getText().isEmpty()){
+                Alert a=new Alert(Alert.AlertType.ERROR);
+                a.setContentText("Debe ingresar un titulo");
+                a.showAndWait();
+                eh.consume();
+            }else{
+               DirectoryChooser directoryChooser = new DirectoryChooser();
+                directoryChooser.setTitle("Seleccionar carpeta");
 
-            
+                File selectedDirectory = directoryChooser.showDialog(null);
+                
+                String ruta=selectedDirectory.getAbsolutePath();
+                System.out.println(ruta);
+                if (selectedDirectory != null) {
+                    imagenDirectorio(emojiBlock,titulotxt.getText(),ruta);
+                    Alert a=new Alert(Alert.AlertType.CONFIRMATION);
+                    a.setContentText("Imagen guaradada en: "+selectedDirectory.getPath());
+                    a.showAndWait();
+                    
+                } else {
+                    eh.consume();
+                    System.out.println("Ninguna carpeta seleccionada.");
+                } 
+            }
+        
         });
     }
+    
     //meotod que carga panel y setean atributos iniciales 
     public void startComboBox(){
          this.contenedorScroll.getChildren().clear();
@@ -442,6 +444,27 @@ public class EmojiLienzoController implements Initializable {
     }
     return null;
 }
+   public void imagenDirectorio(AnchorPane ap,String nombreProyecto,String ruta){
+      WritableImage snapshot = ap.snapshot(new SnapshotParameters(), null);
+    BufferedImage bufferedImage = SwingFXUtils.fromFXImage(snapshot, null);
+    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    try {
+        ImageIO.write(bufferedImage, "png", outputStream);
+        byte[] imageData = outputStream.toByteArray();
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(imageData);
+
+        String imagePath = ruta +"//"+ nombreProyecto + ".png";
+        
+        
+        //lo guardamos en un archivo que pueda ser enviado cuando se escriba la imagen
+        File outputFile = new File(imagePath);
+        //se escribe la imagen
+        ImageIO.write(bufferedImage, "png", outputFile);
+    
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+   }
    public Proyecto crearProyecto(String nombreProyecto, Image portada){
        //tengo que poner cada uno de los url
        

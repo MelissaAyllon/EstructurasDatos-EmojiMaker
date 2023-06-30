@@ -1,6 +1,7 @@
 package com.mycompany.emojimaker;
 
 
+import Classes.Proyecto;
 import Classes.Usuario;
 import TDASimplement.ArrayList;
 import java.io.FileInputStream;
@@ -19,21 +20,24 @@ import java.io.ObjectOutputStream;
  * JavaFX App
  */
 public class App extends Application {
-    public static ArrayList<Usuario> usuarios=deserInfo();
+  public static ArrayList<Usuario> usuarios=deserInfo();
+//    public static ArrayList<Usuario> usuarios=new ArrayList<>();
     private static Scene scene;
     public static Usuario usuarioSeleccionado=null;
 
     @Override
     public void start(Stage stage) throws IOException {
 
-//        Usuario uprueba=new Usuario("dtruiz", "dtruiz");
-//        usuarios.addLast(uprueba);
-
-//        Datos.guardarDatos("src/main/resources/usuarios.ser", Datos.escribirUsuarios());
-//        //Se escriben los datos del archivo al programa
-//        usuarios = Datos.escribirDatos("src/main/resources/usuarios.ser");
         
-
+//       Usuario u1=new Usuario("dtruiz", "dtruiz");
+//       Usuario u2=new Usuario("nruiz", "nruiz");
+//       Usuario u3=new Usuario("eruiz", "eruiz");
+//       usuarios.addLast(u3);
+//       usuarios.addLast(u2);
+//       usuarios.addLast(u1);
+       
+            
+    
         scene = new Scene(loadFXML("welcomeWindow"), 700, 600);
         stage.setScene(scene);
         stage.show();
