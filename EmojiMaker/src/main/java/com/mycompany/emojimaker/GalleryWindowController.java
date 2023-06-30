@@ -92,23 +92,11 @@ public class GalleryWindowController implements Initializable {
 
             //1 llenar el contenedor(FLOWPANE) con los proyectos que tiene
             //tenemos un arraylist con proyecto, ahora debemos iterar 
-            for(Proyecto proy: userProyects){
-                
-                //tenemos 1 proyecto y queremos conseguir de ese proyecto la portada que es imagen
-                Image img = proy.getContent().getPortada();
-                
-                //vamos a ir mostrando esa portada
-                ImageView imv = new ImageView(img);
-                imv.setFitHeight(80);
-                imv.setFitHeight(80);
-                
-                //si se le da click debe abrirse la otra pestana con ese proyecto para editar
-                imv.setOnMouseClicked(event -> {
-                    editarProyecto(proy);
-                } );
-                
-                //anade al panel de proyectos cada uno
-                proyectosPane.getChildren().add(imv);
+           proyectosPane.getChildren().clear();
+           for (Proyecto p: userProyects){
+                Label l=new Label();
+                l.setText(p.getProName());
+                proyectosPane.getChildren().add(l);
             }
             
         }

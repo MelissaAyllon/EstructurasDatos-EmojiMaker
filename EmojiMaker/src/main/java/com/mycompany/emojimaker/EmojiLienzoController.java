@@ -44,6 +44,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
@@ -51,6 +54,7 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import pruebas.Main;
@@ -113,6 +117,7 @@ public class EmojiLienzoController implements Initializable {
     private ImageView ivSelected;
     private DCLList<ImageView> selectedList;
     
+    
     ObservableList<String> options = FXCollections.observableArrayList(
                 "ojos",
                 "cara",
@@ -158,9 +163,22 @@ public class EmojiLienzoController implements Initializable {
                 Image imagen = convertAnchorPaneToImage(emojiBlock,texto);
                 
                 //Primero crear proyecto 
+                
                 Proyecto proy =crearProyecto(texto,imagen);
                 App.usuarioSeleccionado.getProyectos().addLast(proy);
-                System.out.println(App.usuarioSeleccionado.getProyectos());
+               
+                for (Proyecto p: App.usuarioSeleccionado.getProyectos()){
+                    System.out.println(p.getContent().getPortada().toString());
+                }
+                try {
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("galleryWindow.fxml"));
+            Parent p= loader.load();
+            GalleryWindowController controller=loader.getController();
+            controller.llenarContenedor();
+            
+        } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+        }
             });
         });
     }
@@ -178,7 +196,9 @@ public class EmojiLienzoController implements Initializable {
             }else{
                 Image i=nodoF.getContent().getImage();
                 this.ivSelected.setImage(i);
+                
                 nodoF=nodoF.getNext();
+                
                 
             }
     }
@@ -192,6 +212,7 @@ public class EmojiLienzoController implements Initializable {
                 nodoF=nodoF.getPrevious();
                 Image i=nodoF.getContent().getImage();
                 this.ivSelected.setImage(i);
+                
                 
             }
     }
@@ -246,12 +267,14 @@ public class EmojiLienzoController implements Initializable {
                 this.nodoF=this.ojos.getNode();
                 this.ivSelected=this.emojiEyes; //posiciona el imageview de la opcion escogida
                 this.selectedList=this.ojos;
+                
             }
              if (seleccionado.equals("boca")){
                 cargarFeatures(bocas);
                 this.nodoF=this.bocas.getNode();
                 this.ivSelected=this.emojiMouth;
                 this.selectedList=this.bocas;
+               
                 
             }
               if (seleccionado.equals("cara")){
@@ -260,12 +283,14 @@ public class EmojiLienzoController implements Initializable {
                 this.ivSelected=this.emojiFace;
                 this.selectedList=this.caras;
                 
+                
             }
                if (seleccionado.equals("ceja")){
                 cargarFeatures(cejas);
                 this.nodoF=this.cejas.getNode();
                 this.ivSelected=this.emojiBrows;
                 this.selectedList=this.cejas;
+                
                 
             }
                 if (seleccionado.equals("accesorios")){
@@ -284,7 +309,9 @@ public class EmojiLienzoController implements Initializable {
             iv.setFitWidth(60);
             iv.setOnMouseClicked(eh->{
                 this.ivSelected.setImage(iv.getImage());
+              
                 nodoF=lista.getNodeByContent(iv);
+                
             });
             this.contenedorScroll.getChildren().add(iv);
         }
@@ -384,14 +411,22 @@ public class EmojiLienzoController implements Initializable {
 }
    public Proyecto crearProyecto(String nombreProyecto, Image portada){
        //tengo que poner cada uno de los url
-       String ojosUrl = emojiEyes.getImage().getUrl();
-       String bocaUrl = emojiMouth.getImage().getUrl();
-       String cejasUrl = emojiBrows.getImage().getUrl();
-       String caraUrl = emojiFace.getImage().getUrl();
+       
+       ImageView ojosUrl=this.getEmojiEyes();
+       
+      
+       ImageView bocaUrl = this.getEmojiMouth();
+       ImageView cejasUrl = this.getEmojiBrows();
+       ImageView caraUrl = this.getEmojiFace();
        String accUrl; //esta para el accesorio
+       System.out.println(this.getEmojiEyes().toString());
+       System.out.println(this.getEmojiMouth().toString());
+       System.out.println(this.getEmojiBrows().toString());
+       System.out.println(this.getEmojiFace().toString());
        Emoji emoji = new Emoji(ojosUrl,bocaUrl,cejasUrl,caraUrl,portada);
        //Creo el proyecto
        Proyecto proy = new Proyecto(nombreProyecto,emoji);
+       
        return proy;
    }
    //metodo que se acciona cuando un proyecto es abierto
@@ -399,11 +434,11 @@ public class EmojiLienzoController implements Initializable {
         try {
             //aqui me pasa el proyecto debo colocar los image view como los tiene
             //cargamos las caracteristicas del emoji/ o podemos ir viendo en la lista
-            Image ojosIm = Main.crearImagen(new File(proy.getContent().getEyes_url()));
-            Image bocaIm = Main.crearImagen(new File(proy.getContent().getMouth_url()));
-            Image cejasIm = Main.crearImagen(new File(proy.getContent().getBrows_url()));
-            Image caraIm = Main.crearImagen(new File(proy.getContent().getFace_url()));
-            Image accIm = Main.crearImagen(new File(proy.getContent().getAccesory()));
+            Image ojosIm = Main.crearImagen(new File(proy.getContent().getEyes_url().getImage().getUrl()));
+            Image bocaIm = Main.crearImagen(new File(proy.getContent().getMouth_url().getImage().getUrl()));
+            Image cejasIm = Main.crearImagen(new File(proy.getContent().getBrows_url().getImage().getUrl()));
+            Image caraIm = Main.crearImagen(new File(proy.getContent().getFace_url().getImage().getUrl()));
+            Image accIm = Main.crearImagen(new File(proy.getContent().getAccesory().getImage().getUrl()));
             
             //se la agrega al atributo correspondiente de nuestro lienzo
             emojiEyes.setImage(ojosIm);
