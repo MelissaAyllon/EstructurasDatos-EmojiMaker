@@ -21,8 +21,11 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        //Se escriben los datos del archivo al programa
-        usuarios = Datos.escribirDatos("src/main/resources/usuarios.ser");
+        Usuario uprueba=new Usuario("dtruiz", "dtruiz");
+        usuarios.addLast(uprueba);
+//        Datos.guardarDatos("src/main/resources/usuarios.ser", Datos.escribirUsuarios());
+//        //Se escriben los datos del archivo al programa
+//        usuarios = Datos.escribirDatos("src/main/resources/usuarios.ser");
         
         scene = new Scene(loadFXML("welcomeWindow"), 700, 600);
         stage.setScene(scene);
