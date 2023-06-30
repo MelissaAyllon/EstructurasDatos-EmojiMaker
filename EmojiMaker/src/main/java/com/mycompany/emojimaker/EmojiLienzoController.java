@@ -167,6 +167,7 @@ public class EmojiLienzoController implements Initializable {
                 TextField tf=new TextField();
                 Button b=new Button("OK");
                 
+
                 VBox contenedorScena=new VBox();
                 VBox.setMargin(b, new Insets(15, 15, 15, 15));
                 VBox.setMargin(l, new Insets(15, 15, 15, 15));
@@ -208,6 +209,7 @@ public class EmojiLienzoController implements Initializable {
                 System.out.println(ex.getMessage());
             }
             
+
             
         });
     }
@@ -448,10 +450,10 @@ public class EmojiLienzoController implements Initializable {
        ImageView cejasUrl = this.getEmojiBrows();
        ImageView caraUrl = this.getEmojiFace();
        String accUrl; //esta para el accesorio
-       System.out.println(this.getEmojiEyes().toString());
-       System.out.println(this.getEmojiMouth().toString());
-       System.out.println(this.getEmojiBrows().toString());
-       System.out.println(this.getEmojiFace().toString());
+//       System.out.println(this.getEmojiEyes().toString());
+//       System.out.println(this.getEmojiMouth().toString());
+//       System.out.println(this.getEmojiBrows().toString());
+//       System.out.println(this.getEmojiFace().toString());
        Emoji emoji = new Emoji(ojosUrl,bocaUrl,cejasUrl,caraUrl,portada);
        //Creo el proyecto
        Proyecto proy = new Proyecto(nombreProyecto,emoji);

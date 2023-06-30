@@ -16,6 +16,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -32,6 +34,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -86,18 +89,30 @@ public class GalleryWindowController implements Initializable {
   
 
     public void llenarContenedor(){
-            proyectosPane.getChildren().clear();
-            for (Proyecto p: App.usuarioSeleccionado.getProyectos()){
-               ImageView iv=new ImageView();
-               Image image=p.getContent().getPortada();
-               iv.setImage(image);
-               iv.setFitHeight(80);
-               iv.setFitWidth(80);
-              
-               proyectosPane.setHgap(10);
-               proyectosPane.setVgap(10);
-              
-               proyectosPane.getChildren().add(iv);
+
+        //deberia recorrer la lista de proyectos del usuario seleccionado y mostrarlos 
+        //Al dar click a proyecto seleccionado deberia abrrse el controller del lienzo y editar ESE proyecto 
+
+            //1 llenar el contenedor(FLOWPANE) con los proyectos que tiene
+            //tenemos un arraylist con proyecto, ahora debemos iterar 
+           proyectosPane.getChildren().clear();
+           
+          
+           for (Proyecto p: userProyects){
+                VBox contenedorP=new VBox();
+                contenedorP.setAlignment(Pos.CENTER);
+                Label l=new Label();
+                l.setAlignment(Pos.CENTER);
+                ImageView imagen = new ImageView(p.getContent().getPortada());
+                imagen.setFitHeight(100);
+                imagen.setFitWidth(120);
+                FlowPane.setMargin(contenedorP, new Insets(20, 20, 20, 20));
+                l.setText(p.getProName());
+                contenedorP.getChildren().addAll(imagen,l);
+                proyectosPane.getChildren().add(contenedorP);
+                
+                
+
             }
             
         }
