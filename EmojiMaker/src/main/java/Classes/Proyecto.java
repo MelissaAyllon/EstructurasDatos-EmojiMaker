@@ -4,11 +4,13 @@
  */
 package Classes;
 
+import java.io.Serializable;
+
 /**
  *
  * @author USUARIO
  */
-public class Proyecto {
+public class Proyecto  implements Serializable{
     String proName;
     Emoji content;
 

@@ -4,6 +4,7 @@
  */
 package Classes;
 
+import java.io.Serializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -11,14 +12,14 @@ import javafx.scene.image.ImageView;
  *
  * @author USUARIO
  */
-public class Emoji {
-    private ImageView eyes_url;
-    private ImageView  mouth_url;
-    private ImageView  brows_url;
-    private ImageView  face_url;
-    private ImageView  accesory; 
-    private Image portada;
-    public Emoji(ImageView eyes_url, ImageView mouth_url, ImageView brows_url, ImageView face_url, Image portada) {
+public class Emoji implements Serializable {
+    private String eyes_url;
+    private String mouth_url;
+    private String  brows_url;
+    private String  face_url;
+    private String  accesory; 
+    private String portada;
+    public Emoji(String eyes_url, String mouth_url, String brows_url, String face_url, String portada) {
         this.eyes_url = eyes_url;
         this.mouth_url = mouth_url;
         this.brows_url = brows_url;
@@ -27,60 +28,58 @@ public class Emoji {
         
     }
 
-    public Image getPortada() {
+    public String getEyes_url() {
+        return eyes_url;
+    }
+
+    public void setEyes_url(String eyes_url) {
+        this.eyes_url = eyes_url;
+    }
+
+    public String getMouth_url() {
+        return mouth_url;
+    }
+
+    public void setMouth_url(String mouth_url) {
+        this.mouth_url = mouth_url;
+    }
+
+    public String getBrows_url() {
+        return brows_url;
+    }
+
+    public void setBrows_url(String brows_url) {
+        this.brows_url = brows_url;
+    }
+
+    public String getFace_url() {
+        return face_url;
+    }
+
+    public void setFace_url(String face_url) {
+        this.face_url = face_url;
+    }
+
+    public String getAccesory() {
+        return accesory;
+    }
+
+    public void setAccesory(String accesory) {
+        this.accesory = accesory;
+    }
+    
+
+    public String getPortada() {
         return portada;
     }
 
-    public void setPortada(Image portada) {
+    public void setPortada(String portada) {
         this.portada = portada;
     }
 
-    public Emoji(ImageView eyes_url, ImageView mouth_url, ImageView brows_url, ImageView face_url,ImageView accesory, Image portada) {
+    public Emoji(String eyes_url, String mouth_url, String brows_url, String face_url,String accesory, String portada) {
         this(eyes_url, mouth_url, brows_url, face_url,portada);
         this.accesory = accesory;
     }
 
-    public ImageView getEyes_url() {
-        return eyes_url;
-    }
-
-    public void setEyes_url(ImageView eyes_url) {
-        this.eyes_url = eyes_url;
-    }
-
-    public ImageView getMouth_url() {
-        return mouth_url;
-    }
-
-    public void setMouth_url(ImageView mouth_url) {
-        this.mouth_url = mouth_url;
-    }
-
-    public ImageView getBrows_url() {
-        return brows_url;
-    }
-
-    public void setBrows_url(ImageView brows_url) {
-        this.brows_url = brows_url;
-    }
-
-    public ImageView getFace_url() {
-        return face_url;
-    }
-
-    public void setFace_url(ImageView face_url) {
-        this.face_url = face_url;
-    }
-
-    public ImageView getAccesory() {
-        return accesory;
-    }
-
-    public void setAccesory(ImageView accesory) {
-        this.accesory = accesory;
-    }
-
-   
-    
-    
 }

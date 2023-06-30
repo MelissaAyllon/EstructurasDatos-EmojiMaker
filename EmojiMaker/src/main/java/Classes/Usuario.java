@@ -5,12 +5,13 @@
 package Classes;
 
 import TDASimplement.ArrayList;
+import java.io.Serializable;
 
 /**
  *
  * @author USUARIO
  */
-public class Usuario {
+public class Usuario implements Serializable{
     private String username;
     private String password;
     private ArrayList<Proyecto> proyectos;

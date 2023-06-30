@@ -197,12 +197,14 @@ public class EmojiLienzoController implements Initializable {
                 stg.showAndWait();
                 //TODO EL CODIGO ARRIBA SOLO ME DEVUELVE UN NOMBRE PARA MI PROYECTO//
                 //TENIENDO EL NOMBRE DEBO CREAR EL PROYECTO (PORTADA)//
-                Image portada=convertAnchorPaneToImage(emojiBlock, nomProyect,"src\\main\\resources\\ImagenesProyectos\\");
-                Emoji e=new Emoji(emojiEyes, emojiMouth, emojiBrows, emojiFace, portada);
+                Image portada=new Image("file:"+convertAnchorPaneToImage(emojiBlock, nomProyect,"src\\main\\resources\\ImagenesProyectos\\"));
+                System.out.println(portada.getUrl());
+                Emoji e=new Emoji(emojiEyes.getImage().getUrl(), emojiMouth.getImage().getUrl(), emojiBrows.getImage().getUrl(), emojiFace.getImage().getUrl(), portada.getUrl());
                 Proyecto proyecton=new Proyecto(nomProyect, e);
                 App.usuarioSeleccionado.getProyectos().addLast(proyecton);
                 
                 App.setRoot("galleryWindow");
+                App.serializarEstadoActual(App.usuarios);
                Stage stage = (Stage) this.btnGuardar.getScene().getWindow();
                 stage.close();
             } catch (IOException ex) {
@@ -415,7 +417,7 @@ public class EmojiLienzoController implements Initializable {
     
       } 
    //metodo que convierte el contenedor del emoji en imagen
-   public static Image convertAnchorPaneToImage(AnchorPane anchorPane,String nombreProyecto,String ruta) {
+   public static String convertAnchorPaneToImage(AnchorPane anchorPane,String nombreProyecto,String ruta) {
     WritableImage snapshot = anchorPane.snapshot(new SnapshotParameters(), null);
     BufferedImage bufferedImage = SwingFXUtils.fromFXImage(snapshot, null);
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -434,7 +436,7 @@ public class EmojiLienzoController implements Initializable {
         File outputFile = new File(imagePath);
         //se escribe la imagen
         ImageIO.write(bufferedImage, "png", outputFile);
-        return new Image(inputStream);
+        return imagePath;
     } catch (IOException e) {
         e.printStackTrace();
     }
@@ -454,7 +456,7 @@ public class EmojiLienzoController implements Initializable {
 //       System.out.println(this.getEmojiMouth().toString());
 //       System.out.println(this.getEmojiBrows().toString());
 //       System.out.println(this.getEmojiFace().toString());
-       Emoji emoji = new Emoji(ojosUrl,bocaUrl,cejasUrl,caraUrl,portada);
+       Emoji emoji = new Emoji(ojosUrl.getImage().getUrl(),bocaUrl.getImage().getUrl(),cejasUrl.getImage().getUrl(),caraUrl.getImage().getUrl(),portada.getUrl());
        //Creo el proyecto
        Proyecto proy = new Proyecto(nombreProyecto,emoji);
        
@@ -465,11 +467,11 @@ public class EmojiLienzoController implements Initializable {
         try {
             //aqui me pasa el proyecto debo colocar los image view como los tiene
             //cargamos las caracteristicas del emoji/ o podemos ir viendo en la lista
-            Image ojosIm = Main.crearImagen(new File(proy.getContent().getEyes_url().getImage().getUrl()));
-            Image bocaIm = Main.crearImagen(new File(proy.getContent().getMouth_url().getImage().getUrl()));
-            Image cejasIm = Main.crearImagen(new File(proy.getContent().getBrows_url().getImage().getUrl()));
-            Image caraIm = Main.crearImagen(new File(proy.getContent().getFace_url().getImage().getUrl()));
-            Image accIm = Main.crearImagen(new File(proy.getContent().getAccesory().getImage().getUrl()));
+            Image ojosIm = Main.crearImagen(new File(proy.getContent().getEyes_url()));
+            Image bocaIm = Main.crearImagen(new File(proy.getContent().getMouth_url()));
+            Image cejasIm = Main.crearImagen(new File(proy.getContent().getBrows_url()));
+            Image caraIm = Main.crearImagen(new File(proy.getContent().getFace_url()));
+            Image accIm = Main.crearImagen(new File(proy.getContent().getAccesory()));
             
             //se la agrega al atributo correspondiente de nuestro lienzo
             emojiEyes.setImage(ojosIm);
