@@ -103,11 +103,12 @@ public class GalleryWindowController implements Initializable {
           
            for (Proyecto p: userProyects){
                 VBox contenedorP=new VBox();
+                contenedorP.getStyleClass().add("mi-vbox"); //se anade el estilo con esa clase asginada (ver css file)
                 contenedorP.setAlignment(Pos.CENTER);
                 Label l=new Label();
                 l.setAlignment(Pos.CENTER);
                 ImageView imagen = new ImageView(p.getContent().getPortada());
-
+                
                 imagen.setOnMouseClicked(eh->{
                     proyectoSeleccionado=p;
                     editarProyecto(p);
