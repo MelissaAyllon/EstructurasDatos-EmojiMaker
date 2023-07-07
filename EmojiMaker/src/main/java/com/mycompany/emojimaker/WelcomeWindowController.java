@@ -52,7 +52,7 @@ public class WelcomeWindowController {
                 alerta.setContentText("Usuario o contraseña incorrectos. Intente denuevo");
                 alerta.showAndWait();
             }
-       
+            
         }    
         
     

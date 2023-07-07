@@ -11,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -18,7 +19,9 @@ import javafx.stage.Stage;
  * @author melis
  */
 public class CreateUserController {
-
+    
+    @FXML
+    private AnchorPane mainPanel;
     @FXML
     private TextField nombreUs;
     @FXML
@@ -29,35 +32,52 @@ public class CreateUserController {
     @FXML
     private void crearCuenta(ActionEvent event) {
         //vamos a agarrar el texto de cada caja
-        
-        String nombre = nombreUs.getText();
-        String contrasena = contUs.getText();
-        
-        //Obtengo el arrayList de usuarios
-        //Pero solo si estan los campos llenos
-        while(nombre == null){
-            ingresoNegado("nombre");
+        if (nombreUs.getText().isBlank() || contUs.getText().isBlank()){
+            ingresoNegado("usuario y contraseña");
+            nombreUs.clear();
+            contUs.clear();
+            event.consume();
+            
         }
-        
-        while(contrasena == null){
-            ingresoNegado("contraseña");
+        else{
+            Usuario u=new Usuario(nombreUs.getText(), contUs.getText());
+            boolean valor=false;
+            for (Usuario usu: App.usuarios){
+                if (usu.equals(u)){
+                    valor=true;
+                }
+            }
+            if (valor==false){
+            App.usuarios.addLast(u);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Registro");
+            alert.setHeaderText("Registro Completado Exitosamente");
+            alert.setContentText("Puedes inciar sesion");
+            alert.showAndWait();
+            nombreUs.clear();
+            contUs.clear();
+            alert.close();
+             Stage st = (Stage) nombreUs.getScene().getWindow();
+             st.close();
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Usuario ya existe") ;
+                alert.showAndWait();
+                nombreUs.clear();
+                contUs.clear();
+                alert.close();
+            }
+           
+            
+            
         }
-        //Se anade a la lista
-        App.usuarios.addLast(new Usuario(nombre,contrasena));
-        
-        //serializo la lista
-        App.serializarEstadoActual(App.usuarios);
         
         //Se cierra la ventana
-        Stage st = (Stage) nombreUs.getScene().getWindow();
-        st.close();
+       
         
         //Aparecer ventana que diga exitoso registro ya puedes iniciar sesion
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Registro");
-        alert.setHeaderText("Registro Completado Exitosamente");
-        alert.setContentText("Puedes inciar sesion");
-        alert.showAndWait();
+        
     }
     
     private void ingresoNegado(String error){

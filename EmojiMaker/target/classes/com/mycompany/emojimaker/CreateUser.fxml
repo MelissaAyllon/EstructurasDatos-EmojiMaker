@@ -7,16 +7,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.emojimaker.CreateUserController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.emojimaker.CreateUserController">
    <children>
-      <AnchorPane prefHeight="400.0" prefWidth="600.0">
+      <AnchorPane fx:id="mainPanel" prefHeight="400.0" prefWidth="400.0" stylesheets="@../../../cssStyles/welcome.css">
          <children>
-            <TextField fx:id="nombreUs" layoutX="250.0" layoutY="139.0" />
-            <PasswordField fx:id="contUs" layoutX="250.0" layoutY="200.0" />
-            <Label layoutX="105.0" layoutY="143.0" text="Ingresa nombre" />
-            <Label layoutX="97.0" layoutY="204.0" text="Ingresa contraseña" />
-            <Button fx:id="btnCreaCuenta" layoutX="282.0" layoutY="267.0" mnemonicParsing="false" onAction="#crearCuenta" text="Crear Cuenta" />
-            <Label layoutX="286.0" layoutY="75.0" text="Crea tu cuenta" />
+            <TextField fx:id="nombreUs" layoutX="193.0" layoutY="141.0" />
+            <PasswordField fx:id="contUs" layoutX="193.0" layoutY="176.0" />
+            <Label layoutX="101.0" layoutY="143.0" text="User" textFill="#a94141" />
+            <Label layoutX="101.0" layoutY="178.0" text="Passworrd" textFill="#a94040" />
+            <Button fx:id="btnCreaCuenta" layoutX="175.0" layoutY="210.0" mnemonicParsing="false" onAction="#crearCuenta" text="Sign In" textFill="#a94141" />
          </children>
       </AnchorPane>
    </children>

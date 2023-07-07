@@ -7,22 +7,34 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     Author     : USUARIO
 */
 
-#panelIngreso{
-    -fx-background-color: linear-gradient(to bottom, #faf0e6 0%, #faf0e6 40%, #eee8aa 40%, #eee8aa 100%);
+#logInContainer{
+    -fx-background-image: url("https://i.pinimg.com/originals/29/54/2d/29542dfcfe2c2f7273fb3d665250dce1.gif");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 700 600;
+    -fx-background-position: center center;
 }
-
+#mainPanel{
+    -fx-background-image: url("https://cdn.dribbble.com/users/17707/screenshots/1569761/faces.gif");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 400 400;
+    -fx-background-position: center center;
+}
 .label {
-    -fx-font-family: "Arial";
+    -fx-font-family: "Impact";
     -fx-font-size: 16px;
     -fx-font-weight: bold;
+    -fx-text-color: white;
+    
+    
 }
 
 #userNTextF{
     
     -fx-font-family: "Arial"; /* fuente texto*/
-    -fx-font-size: 14px;
+    -fx-font-size: 12px;
     -fx-background-color: #FFFFFF; /* Fondo color */
-    -fx-text-fill: #000000;        /*colo de las letras*/
+    -fx-text-fill: #ac3f3f;        /*colo de las letras*/
+     
     -fx-border-color: #D2B48C;     /*Color del borde*/
     -fx-border-width: 2px;         /*Ancho del borde*/
     -fx-border-radius: 5px;        /*radio del borde*/
@@ -31,7 +43,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 }
 
 #passwordTF{
-    -fx-font-family: "Arial";
+    -fx-font-family: "Impact";
     -fx-font-size: 14px;
     -fx-background-color: #FFFFFF; /* Fondo blanco */
     -fx-text-fill: #000000;
@@ -52,7 +64,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-border-radius: 5px;
     -fx-background-radius: 5px; 
     
-    -fx-font-family: "Arial";
+    -fx-font-family: "Impact";
     -fx-font-size: 14px;
     -fx-font-weight: bold;
 }

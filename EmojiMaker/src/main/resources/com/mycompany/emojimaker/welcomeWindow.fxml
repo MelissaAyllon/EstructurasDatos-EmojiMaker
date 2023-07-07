@@ -6,17 +6,24 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
 <HBox fx:id="panelIngreso" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" stylesheets="@../../../cssStyles/welcome.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.emojimaker.WelcomeWindowController">
    <children>
       <AnchorPane fx:id="logInContainer" prefHeight="600.0" prefWidth="700.0" stylesheets="@../../../cssStyles/welcome.css">
          <children>
-            <Label layoutX="202.0" layoutY="252.0" text="Username" />
-            <Label layoutX="203.0" layoutY="290.0" text="Password" />
+            <Label layoutX="222.0" layoutY="253.0" prefHeight="22.0" prefWidth="75.0" stylesheets="@../../../cssStyles/welcome.css" text="Username" textFill="#ac3f3f">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            <Label layoutX="222.0" layoutY="289.0" text="Password" textFill="#ac3f3f">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
             <TextField fx:id="userNTextF" layoutX="303.0" layoutY="249.0" />
-            <Button fx:id="logInButton" layoutX="303.0" layoutY="328.0" mnemonicParsing="false" onAction="#logIn" text="Log In" />
+            <Button fx:id="logInButton" layoutX="303.0" layoutY="328.0" mnemonicParsing="false" onAction="#logIn" text="Log In" textFill="#ac3f3f" />
             <PasswordField fx:id="passwordTF" layoutX="303.0" layoutY="287.0" />
-            <Button fx:id="btnSigIn" layoutX="412.0" layoutY="328.0" mnemonicParsing="false" onAction="#signIn" text="Sign In" />
+            <Button fx:id="btnSigIn" layoutX="412.0" layoutY="328.0" mnemonicParsing="false" onAction="#signIn" text="Sign In" textFill="#ac3f3f" />
          </children>
       </AnchorPane>
    </children>
