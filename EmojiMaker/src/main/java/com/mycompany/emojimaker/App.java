@@ -26,18 +26,13 @@ public class App extends Application {
     public static Usuario usuarioSeleccionado=null;
 
     @Override
-    public void start(Stage stage) throws IOException {
-
-        
-//       Usuario u1=new Usuario("dtruiz", "dtruiz");
+    public void start(Stage stage) throws IOException { 
+     
 //       Usuario u2=new Usuario("nruiz", "nruiz");
-//       Usuario u3=new Usuario("eruiz", "eruiz");
+//       Usuario u3=new Usuario("zcapuz", "zcapuz");
 //       usuarios.addLast(u3);
 //       usuarios.addLast(u2);
-//       usuarios.addLast(u1);
-       
-            
-    
+//     
         scene = new Scene(loadFXML("welcomeWindow"), 700, 600);
         stage.setScene(scene);
         stage.show();

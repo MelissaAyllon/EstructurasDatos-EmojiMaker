@@ -15,7 +15,7 @@ import java.util.Iterator;
 public class ArrayList<E> implements Serializable,List<E>, Iterable<E>{
 
 
-       private E[] elements;
+    private E[] elements;
     private int MAX_SIZE = 100;
     private int effectiveSize;
 

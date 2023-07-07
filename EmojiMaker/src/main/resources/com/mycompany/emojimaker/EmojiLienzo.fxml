@@ -3,7 +3,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,9 +13,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" fx:id="panelPrincipal" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.emojimaker.EmojiLienzoController">
+<AnchorPane id="AnchorPane" fx:id="panelPrincipal" prefHeight="600.0" prefWidth="784.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.emojimaker.EmojiLienzoController">
    <children>
-      <HBox fx:id="contenedorBotonesYLienzo" layoutX="-2.0" layoutY="8.0" prefHeight="382.0" prefWidth="600.0">
+      <HBox fx:id="contenedorBotonesYLienzo" layoutX="-2.0" layoutY="8.0" prefHeight="548.0" prefWidth="784.0">
          <children>
             <VBox fx:id="contenedorBotones" prefHeight="382.0" prefWidth="146.0" spacing="20.0">
                <children>
@@ -79,6 +81,18 @@
                      </children></VBox>
                </children>
             </VBox>
+            <AnchorPane fx:id="contenedorModificadores" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="88.0" layoutY="170.0" text="setX" fx:id="xPosition" />
+                  <Label fx:id="Yposition" layoutX="85.0" layoutY="238.0" text="setY" />
+                  <Slider fx:id="sliderX" blockIncrement="1.0" layoutX="22.0" layoutY="197.0" max="10.0" min="-10.0" prefHeight="26.0" prefWidth="154.0" />
+                  <Slider fx:id="sliderY" blockIncrement="1.0" layoutX="86.0" layoutY="257.0" max="10.0" min="-10.0" orientation="VERTICAL" prefHeight="134.0" prefWidth="26.0" rotate="180.0" />
+                  <Label fx:id="labelheight" layoutX="33.0" layoutY="103.0" text="height" />
+                  <Label fx:id="labelWidth" layoutX="35.0" layoutY="60.0" text="width" />
+                  <TextField fx:id="boxWidth" layoutX="84.0" layoutY="56.0" prefHeight="26.0" prefWidth="61.0" />
+                  <TextField fx:id="boxHeight" layoutX="84.0" layoutY="99.0" prefHeight="26.0" prefWidth="61.0" />
+               </children>
+            </AnchorPane>
          </children>
       </HBox>
    </children>

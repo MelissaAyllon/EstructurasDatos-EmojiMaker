@@ -77,7 +77,7 @@ public class GalleryWindowController implements Initializable {
             FXMLLoader loader=new FXMLLoader(getClass().getResource("EmojiLienzo.fxml"));
             Parent p= loader.load();
             EmojiLienzoController controller=loader.getController();
-            Scene s=new Scene(p,700,600);
+            Scene s=new Scene(p,800,600);
             Stage st=new Stage();
            
             st.setScene(s);
@@ -108,6 +108,11 @@ public class GalleryWindowController implements Initializable {
                 Label l=new Label();
                 l.setAlignment(Pos.CENTER);
                 ImageView imagen = new ImageView(p.getContent().getPortada());
+                imagen.setOnMouseClicked(eh->{
+                    proyectoSeleccionado=p;
+                    editarProyecto(p);
+                    
+                });
                 imagen.setFitHeight(100);
                 imagen.setFitWidth(120);
                 FlowPane.setMargin(contenedorP, new Insets(20, 20, 20, 20));
@@ -121,7 +126,7 @@ public class GalleryWindowController implements Initializable {
             
         }
 
-    private void editarProyecto(Proyecto proy) {
+    public void editarProyecto(Proyecto proy) {
         try {
             //abre la otra ventana para editar
             FXMLLoader loader=new FXMLLoader(getClass().getResource("EmojiLienzo.fxml"));
@@ -129,7 +134,8 @@ public class GalleryWindowController implements Initializable {
             EmojiLienzoController controller=loader.getController();
             //antes de crear la ventana: se cargan los elementos del proyecto 
             controller.cargarProyecto(proy);
-            Scene s=new Scene(p,700,600);
+            
+            Scene s=new Scene(p,800,600);
             Stage st=new Stage();
            
             st.setScene(s);
@@ -140,6 +146,8 @@ public class GalleryWindowController implements Initializable {
             ex.printStackTrace();
         }
     }
+
+   
      
     }
 
