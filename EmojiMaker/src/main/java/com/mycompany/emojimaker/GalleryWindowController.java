@@ -67,7 +67,6 @@ public class GalleryWindowController implements Initializable {
         App.getScene().getWindow().setOnCloseRequest(eh->{
             App.serializarEstadoActual(App.usuarios);
         });
-
     }    
     
 
@@ -108,11 +107,13 @@ public class GalleryWindowController implements Initializable {
                 Label l=new Label();
                 l.setAlignment(Pos.CENTER);
                 ImageView imagen = new ImageView(p.getContent().getPortada());
+
                 imagen.setOnMouseClicked(eh->{
                     proyectoSeleccionado=p;
                     editarProyecto(p);
                     
                 });
+
                 imagen.setFitHeight(100);
                 imagen.setFitWidth(120);
                 FlowPane.setMargin(contenedorP, new Insets(20, 20, 20, 20));
@@ -137,7 +138,7 @@ public class GalleryWindowController implements Initializable {
             
             Scene s=new Scene(p,800,600);
             Stage st=new Stage();
-           
+
             st.setScene(s);
             
             st.showAndWait();

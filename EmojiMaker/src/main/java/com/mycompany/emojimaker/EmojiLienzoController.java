@@ -629,12 +629,19 @@ public class EmojiLienzoController implements Initializable {
         
             //aqui me pasa el proyecto debo colocar los image view como los tiene
             //cargamos las caracteristicas del emoji/ o podemos ir viendo en la lista
+
             Image ojosIm = new Image(proy.getContent().getEyes_url());
             Image bocaIm = new Image(proy.getContent().getMouth_url());
             Image cejasIm = new Image(proy.getContent().getBrows_url());
             Image caraIm =new Image(proy.getContent().getFace_url());
 //            Image accIm = new Image(proy.getContent().getAccesory());
-            
+
+//            Image ojosIm = Main.crearImagen(new File(proy.getContent().getEyes_url()));
+//            Image bocaIm = Main.crearImagen(new File(proy.getContent().getMouth_url()));
+//            Image cejasIm = Main.crearImagen(new File(proy.getContent().getBrows_url()));
+//            Image caraIm = Main.crearImagen(new File(proy.getContent().getFace_url()));
+//            Image accIm = Main.crearImagen(new File(proy.getContent().getAccesory()));
+
             //se la agrega al atributo correspondiente de nuestro lienzo
             emojiEyes.setImage(ojosIm);
             emojiMouth.setImage(bocaIm);
@@ -642,7 +649,9 @@ public class EmojiLienzoController implements Initializable {
             emojiFace.setImage(caraIm);
             //faltaria el accesorio++++=+++++++++
             
-      
+
+            titulotxt.setText(proy.getProName());
+ 
    }
 
     public ImageView getEmojiFace() {
