@@ -7,3 +7,57 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     Author     : USUARIO
 */
 
+#panelIngreso{
+    -fx-background-color: linear-gradient(to bottom, #faf0e6 0%, #faf0e6 40%, #eee8aa 40%, #eee8aa 100%);
+}
+
+.label {
+    -fx-font-family: "Arial";
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+#userNTextF{
+    
+    -fx-font-family: "Arial"; /* fuente texto*/
+    -fx-font-size: 14px;
+    -fx-background-color: #FFFFFF; /* Fondo color */
+    -fx-text-fill: #000000;        /*colo de las letras*/
+    -fx-border-color: #D2B48C;     /*Color del borde*/
+    -fx-border-width: 2px;         /*Ancho del borde*/
+    -fx-border-radius: 5px;        /*radio del borde*/
+    -fx-background-radius: 5px;    /*radio del fondo que vaya acorde al radio del borde*/
+    -fx-background-insets: 0;   /*margen con el borde esta en 0 ambas estan igualadas*/
+}
+
+#passwordTF{
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+    -fx-background-color: #FFFFFF; /* Fondo blanco */
+    -fx-text-fill: #000000;
+    -fx-border-color: #D2B48C; /* Color café claro */
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-background-insets: 0;
+}
+.button{
+/*    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;*/
+
+    -fx-background-color: linear-gradient(to bottom, #FFD700, #FFA500);
+    -fx-border-color: #ffe4b5;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px; 
+    
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+
+.button:hover{
+    -fx-background-color: lightgray;
+}
