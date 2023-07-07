@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -32,7 +33,7 @@ public class WelcomeWindowController {
     private PasswordField passwordTF;
     @FXML
     private Button logInButton;
-   @FXML
+    @FXML
     private Button btnSigIn;
 
     public void initialize(URL url, ResourceBundle rb) {
@@ -65,6 +66,24 @@ public class WelcomeWindowController {
             }
         }
         return valorIngreso;
+    }
+
+    @FXML
+    private void signIn(ActionEvent event) {
+        //Crear una nueva ventana para CREAR USUARIO
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateUser.fxml"));
+        Parent root;
+        
+        try {
+            root = loader.load();
+            Scene  s = new Scene(root);
+            Stage st = new Stage();
+            st.setScene(s);
+            st.showAndWait();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        
     }
     
 }
