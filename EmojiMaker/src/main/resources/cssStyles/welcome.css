@@ -8,7 +8,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 */
 
 #logInContainer{
-    -fx-background-image: url("https://i.pinimg.com/originals/29/54/2d/29542dfcfe2c2f7273fb3d665250dce1.gif");
+    -fx-background-image: url("https://64.media.tumblr.com/97ab2bdfecc3f3477a2e277d0e0947e4/2cddeff16ecf7a79-63/s1280x1920/decad1dfe0474b78cf65e3dec04384561a4e84ad.gifv");
     -fx-background-repeat: no-repeat;
     -fx-background-size: 700 600;
     -fx-background-position: center center;
@@ -20,6 +20,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-background-position: center center;
 }
 .label {
+    -fx-background-color: linear-gradient(to bottom, #FFD700, #FFA500);
+    -fx-border-color: #ffe4b5;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px; 
     -fx-font-family: "Impact";
     -fx-font-size: 16px;
     -fx-font-weight: bold;

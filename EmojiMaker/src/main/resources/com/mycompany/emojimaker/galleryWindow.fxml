@@ -12,7 +12,7 @@
    <children>
       <VBox fx:id="contenedorBotones" prefHeight="389.0" prefWidth="155.0" spacing="50.0">
          <children>
-            <Button fx:id="addEmoji" mnemonicParsing="false" onAction="#newEmoji" prefHeight="26.0" prefWidth="103.0" text="Crear Emoji">
+            <Button fx:id="addEmoji" mnemonicParsing="false" onAction="#newEmoji" prefHeight="26.0" prefWidth="103.0" text="Crear Emoji" textFill="#b11313">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets></Button>
