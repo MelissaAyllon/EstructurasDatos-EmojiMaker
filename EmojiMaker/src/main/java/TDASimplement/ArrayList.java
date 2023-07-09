@@ -128,7 +128,20 @@ public class ArrayList<E> implements Serializable,List<E>, Iterable<E>{
 
     @Override
     public E remove(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        E elemento=null;
+       
+                 for (int i=index; i<this.effectiveSize; i++){
+                     elemento=elements[i];
+       
+                         this.elements[i]=this.elements[i+1];
+                         
+                     
+                 }
+                 elements[effectiveSize-1]=null;
+                 effectiveSize--;
+             
+        
+        return elemento;
     }
 
     @Override

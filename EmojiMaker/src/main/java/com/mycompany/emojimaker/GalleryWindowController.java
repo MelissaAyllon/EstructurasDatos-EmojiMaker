@@ -10,10 +10,10 @@ import Classes.Proyecto;
 import TDASimplement.ArrayList;
 import java.io.IOException;
 import java.net.URL;
-
 import java.util.ResourceBundle;
 import java.util.Set;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -31,6 +31,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
@@ -51,6 +55,8 @@ public class GalleryWindowController implements Initializable {
      */
    public static ArrayList<Proyecto>userProyects=App.usuarioSeleccionado.getProyectos();
    public static Proyecto proyectoSeleccionado=null;
+   @FXML
+    private ImageView trashCanIcon;
     @FXML
     private VBox contenedorBotones;
     @FXML
@@ -67,6 +73,31 @@ public class GalleryWindowController implements Initializable {
         App.getScene().getWindow().setOnCloseRequest(eh->{
             App.serializarEstadoActual(App.usuarios);
         });
+       this.trashCanIcon.setOnDragOver(eh->{
+                    if (eh.getDragboard().hasString()){
+                        eh.acceptTransferModes(TransferMode.ANY);
+                    }
+                });
+                this.trashCanIcon.setOnDragDropped(eh->{
+                   
+                    int cont=0;
+                    String str=eh.getDragboard().getString();
+                    for (int i=0; i<App.usuarioSeleccionado.getProyectos().size();i++){
+                        if (App.usuarioSeleccionado.getProyectos().get(i).getContent().getPortada().equals(proyectoSeleccionado.getContent().getPortada())){
+                            cont=i;
+                        }
+                       
+                    }
+                    App.usuarioSeleccionado.getProyectos().remove(cont);
+                    
+                    llenarContenedor();
+            try {
+                App.setRoot("galleryWindow");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+                    
+                }); 
     }    
     
 
@@ -103,6 +134,7 @@ public class GalleryWindowController implements Initializable {
           
            for (Proyecto p: userProyects){
                 VBox contenedorP=new VBox();
+               
                 contenedorP.getStyleClass().add("mi-vbox"); //se anade el estilo con esa clase asginada (ver css file)
                 contenedorP.setAlignment(Pos.CENTER);
                 Label l=new Label();
@@ -114,6 +146,21 @@ public class GalleryWindowController implements Initializable {
                     editarProyecto(p);
                     
                 });
+                imagen.setOnDragDetected(new EventHandler<MouseEvent>() {
+      public void handle(MouseEvent event) {
+          /* drag was detected, start a drag-and-drop gesture*/
+          /* allow any transfer mode */
+          Dragboard db = imagen.startDragAndDrop(TransferMode.ANY);
+          
+          /* Put a string on a dragboard */
+          ClipboardContent content = new ClipboardContent();
+          content.putString(imagen.getImage().getUrl());
+          db.setContent(content);
+          proyectoSeleccionado=p;
+          event.consume();
+      }
+  });
+                
 
                 imagen.setFitHeight(100);
                 imagen.setFitWidth(120);
@@ -121,7 +168,7 @@ public class GalleryWindowController implements Initializable {
                 l.setText(p.getProName());
                 contenedorP.getChildren().addAll(imagen,l);
                 proyectosPane.getChildren().add(contenedorP);
-                
+//              
                 
 
             }

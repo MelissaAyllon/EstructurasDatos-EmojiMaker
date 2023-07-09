@@ -12,19 +12,20 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="panelPrincipal" prefHeight="600.0" prefWidth="784.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.emojimaker.EmojiLienzoController">
+<AnchorPane id="AnchorPane" fx:id="panelPrincipal" prefHeight="600.0" prefWidth="784.0" stylesheets="@../../../cssStyles/gallerywindow.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.emojimaker.EmojiLienzoController">
    <children>
       <HBox fx:id="contenedorBotonesYLienzo" layoutX="-2.0" layoutY="8.0" prefHeight="548.0" prefWidth="784.0">
          <children>
             <VBox fx:id="contenedorBotones" prefHeight="382.0" prefWidth="146.0" spacing="20.0">
                <children>
-                  <Button fx:id="btnGuardar" mnemonicParsing="false" prefHeight="26.0" prefWidth="83.0" text="Guardar">
+                  <Button fx:id="btnGuardar" mnemonicParsing="false" prefHeight="38.0" prefWidth="83.0" text="Guardar" textFill="#a91010">
                      <VBox.margin>
                         <Insets left="30.0" top="40.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="btnExportar" mnemonicParsing="false" prefHeight="26.0" prefWidth="83.0" text="Exportar">
+                  <Button fx:id="btnExportar" mnemonicParsing="false" prefHeight="38.0" prefWidth="83.0" text="Exportar" textFill="#a91919">
                      <VBox.margin>
                         <Insets left="30.0" />
                      </VBox.margin>
@@ -47,6 +48,7 @@
                         <ImageView fx:id="emojiBrows" fitHeight="76.0" fitWidth="70.0" layoutX="82.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="emojiEyes" fitHeight="79.0" fitWidth="70.0" layoutX="81.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="emojiMouth" fitHeight="50.0" fitWidth="83.0" layoutX="91.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="accesoryIv" fitHeight="50.0" fitWidth="83.0" layoutX="76.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                      <opaqueInsets>
                         <Insets />
@@ -57,13 +59,22 @@
                   </AnchorPane>
                   <VBox fx:id="featuresListContainers" prefHeight="390.0" prefWidth="450.0" spacing="30.0">
                      <children>
-                        <HBox fx:id="conBtn_Menu" prefHeight="38.0" prefWidth="450.0" spacing="20.0">
+                        <HBox fx:id="conBtn_Menu" prefHeight="55.0" prefWidth="450.0" spacing="20.0">
                            <children>
-                              <Button fx:id="btnPrev" mnemonicParsing="false" prefHeight="42.0" prefWidth="43.0" text="prev" />
-                              <Button fx:id="btnNext" mnemonicParsing="false" prefHeight="39.0" prefWidth="40.0" text="next" />
+                              <Button fx:id="btnPrev" mnemonicParsing="false" prefHeight="29.0" prefWidth="76.0" text="prev">
+                                 <font>
+                                    <Font size="1.0" />
+                                 </font></Button>
+                              <Button fx:id="btnNext" minWidth="46.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="46.0" text="next">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font></Button>
                               <ComboBox fx:id="comboBoxOpciones" prefWidth="150.0" />
-                              <Button fx:id="newFtButton" mnemonicParsing="false" text="Add" />
-                              <Button fx:id="deleteFeatButton" mnemonicParsing="false" text="Delete" />
+                              <Button fx:id="newFtButton" mnemonicParsing="false" prefHeight="29.0" prefWidth="78.0" text="Add">
+                                 <font>
+                                    <Font size="9.0" />
+                                 </font></Button>
+                              <Button fx:id="deleteFeatButton" mnemonicParsing="false" prefHeight="29.0" prefWidth="79.0" text="Delete" />
                            </children>
                            <padding>
                               <Insets left="20.0" />

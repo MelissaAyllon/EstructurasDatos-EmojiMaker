@@ -21,21 +21,15 @@ import java.io.ObjectOutputStream;
  */
 public class App extends Application {
   public static ArrayList<Usuario> usuarios=deserInfo();
-//    public static ArrayList<Usuario> usuarios=new ArrayList<>();
     private static Scene scene;
     public static Usuario usuarioSeleccionado=null;
 
     @Override
-    public void start(Stage stage) throws IOException { 
-     
-//       Usuario u2=new Usuario("nruiz", "nruiz");
-//       Usuario u3=new Usuario("zcapuz", "zcapuz");
-//       usuarios.addLast(u3);
-//       usuarios.addLast(u2);
-//     
+    public void start(Stage stage) throws IOException {      
         scene = new Scene(loadFXML("welcomeWindow"), 700, 600);
         stage.setScene(scene);
         stage.show();
+
     }
 
     static void setRoot(String fxml) throws IOException {

@@ -27,7 +27,19 @@ public class Main {
     public static void main(String[] args) throws MalformedURLException, FileNotFoundException {
         DCLList<String> lista = new DCLList();
         
-        
+        ArrayList<Integer> i=new ArrayList<>();
+        i.addLast(1);
+        i.addLast(3);
+        i.addLast(5);
+        i.addLast(10);
+        i.addLast(40);
+        for (Integer in: i){
+            System.out.println("antes"+in);
+        }
+        i.remove(2);
+        for (Integer in: i){
+            System.out.println("despues"+in);
+        }
         lista.addLast("1");
         lista.addLast("2");
         lista.addLast("3");

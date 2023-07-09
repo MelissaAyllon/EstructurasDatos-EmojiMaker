@@ -29,7 +29,7 @@ public class Emoji implements Serializable {
         this.portada=portada;
         
     }
-
+    
     public String getEyes_url() {
         return eyes_url;
     }

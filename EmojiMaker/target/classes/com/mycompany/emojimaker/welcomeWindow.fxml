@@ -15,25 +15,25 @@
    <children>
       <AnchorPane fx:id="logInContainer" prefHeight="600.0" prefWidth="700.0" stylesheets="@../../../cssStyles/welcome.css">
          <children>
-            <Label layoutX="189.0" layoutY="424.0" prefHeight="26.0" prefWidth="75.0" stylesheets="@../../../cssStyles/welcome.css" text="Username" textFill="#a43c0c">
+            <Label layoutX="189.0" layoutY="330.0" prefHeight="26.0" prefWidth="75.0" stylesheets="@../../../cssStyles/welcome.css" text="Username" textFill="#a43c0c">
                <font>
                   <Font size="18.0" />
                </font>
                <effect>
                   <Glow />
                </effect></Label>
-            <Label layoutX="189.0" layoutY="463.0" prefHeight="26.0" prefWidth="75.0" text="Password" textFill="#a63b0e">
+            <Label layoutX="189.0" layoutY="369.0" prefHeight="26.0" prefWidth="75.0" text="Password" textFill="#a63b0e">
                <font>
                   <Font size="18.0" />
                </font>
                <effect>
                   <Glow />
                </effect></Label>
-            <TextField fx:id="userNTextF" layoutX="282.0" layoutY="422.0" prefHeight="30.0" prefWidth="154.0" />
-            <Button fx:id="logInButton" layoutX="294.0" layoutY="500.0" mnemonicParsing="false" onAction="#logIn" text="Log In" textFill="#ac3f3f" />
-            <PasswordField fx:id="passwordTF" layoutX="282.0" layoutY="461.0" prefHeight="22.0" prefWidth="154.0" />
-            <Button fx:id="btnSigIn" layoutX="359.0" layoutY="500.0" mnemonicParsing="false" onAction="#signIn" text="Sign In" textFill="#ac3f3f" />
-            <ImageView fitHeight="249.0" fitWidth="369.0" layoutX="175.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
+            <TextField fx:id="userNTextF" layoutX="282.0" layoutY="328.0" prefHeight="30.0" prefWidth="154.0" />
+            <Button fx:id="logInButton" layoutX="294.0" layoutY="414.0" mnemonicParsing="false" onAction="#logIn" text="Log In" textFill="#ac3f3f" />
+            <PasswordField fx:id="passwordTF" layoutX="282.0" layoutY="367.0" prefHeight="22.0" prefWidth="154.0" />
+            <Button fx:id="btnSigIn" layoutX="359.0" layoutY="414.0" mnemonicParsing="false" onAction="#signIn" text="Sign In" textFill="#ac3f3f" />
+            <ImageView fitHeight="184.0" fitWidth="331.0" layoutX="172.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../LOGO.png" />
                </image>
