@@ -31,6 +31,8 @@ public class Main {
         i.addLast(1);
         i.addLast(3);
         i.addLast(5);
+        i.addLast(40);
+        i.addLast(100);
         i.addLast(10);
         i.addLast(40);
         for (Integer in: i){

@@ -131,21 +131,8 @@ public class EmojiLienzoController implements Initializable {
     private Button newFtButton;
      @FXML
      private TextField titulotxt;
-     @FXML
-     private Label xPosition;
-     @FXML
-     private Label Yposition;
-     @FXML 
-     private Slider sliderX;
-     @FXML
-     private Slider sliderY;
+ 
    
-     @FXML 
-     private AnchorPane contenedorModificadores;
-     @FXML 
-     TextField boxHeight;
-     @FXML 
-     TextField boxWidth;
      
     private DCLList<ImageView> ojos=new DCLList<>();
     private DCLList<ImageView> bocas=new DCLList<>();
@@ -162,7 +149,7 @@ public class EmojiLienzoController implements Initializable {
     private ArrayList<File> browsFiles;
     private ArrayList<File> extrasFiles;
     private String destinoPath="";
-    
+  
     
     ObservableList<String> options = FXCollections.observableArrayList(
                 "ojos",
@@ -180,7 +167,12 @@ public class EmojiLienzoController implements Initializable {
        bocasFiles=llenarListsBocas();
        browsFiles=llenarListBrows();
        extrasFiles=llenarListsAccessories();
-        
+        DraggableMaker.makeResizable(emojiEyes);
+        DraggableMaker.makeResizable(accesoryIv);
+        DraggableMaker.makeResizable(emojiBrows);
+        DraggableMaker.makeResizable(emojiFace);
+        DraggableMaker.makeResizable(emojiMouth);
+       
         //Llena opciones y evento segun seleccione el usuario
         this.comboBoxOpciones.setItems(options);
         comboBoxOpciones.setOnAction(eh->{
@@ -272,65 +264,10 @@ public class EmojiLienzoController implements Initializable {
             }
         
         });
-        this.sliderX.valueProperty().addListener((ObservableValue<? extends Number> num, Number oldVal, Number newVal)->{
-            xPosition.setText("Posicion x:"+Math.round(newVal.doubleValue()));
-            if (this.comboBoxOpciones.getValue()==null){
-                Alert a=new Alert(Alert.AlertType.ERROR);
-                a.setContentText("debe seleccionar un feature primero");
-                a.showAndWait();
-            }else{
-                 this.ivSelected.setX(newVal.doubleValue());
-            }
-        });
-         this.sliderY.valueProperty().addListener((ObservableValue<? extends Number> num, Number oldVal, Number newVal)->{
-            Yposition.setText("Posicion y:"+Math.round(newVal.doubleValue()));
-            if (this.comboBoxOpciones.getValue()==null){
-                Alert a=new Alert(Alert.AlertType.ERROR);
-                a.setContentText("debe seleccionar un feature primero");
-                a.showAndWait();
-            }else{
-                 this.ivSelected.setY(newVal.doubleValue());
-            }
-        });
-       
-        this.boxHeight.setOnKeyReleased(eh->{
-            changeHeight();
-        });
-        this.boxWidth.setOnKeyReleased(eh->{
-            changeWidth();
-        });
-         
-    }
-    
-
-    private void changeHeight() {
-         if (this.comboBoxOpciones.getValue()==null){
-                Alert a=new Alert(Alert.AlertType.ERROR);
-                a.setContentText("debe seleccionar un feature primero");
-                a.showAndWait();
-            }else{
-             if (!(boxHeight.getText()).isEmpty()){
-            ivSelected.setFitHeight(Double.parseDouble(boxHeight.getText()));
-        }
-            }
-       
-
-}
-
-    private void changeWidth() {
-           if (this.comboBoxOpciones.getValue()==null){
-                Alert a=new Alert(Alert.AlertType.ERROR);
-                a.setContentText("debe seleccionar un feature primero");
-                a.showAndWait();
-            }else{
-           if (!(boxWidth.getText()).isEmpty()){
-         ivSelected.setFitWidth(Double.parseDouble(boxWidth.getText()));
-    
-        }
-            }
-       
         
-        }
+      }
+         
+   
     //meotod que carga panel y setean atributos iniciales 
     public void startComboBox(){
          this.contenedorScroll.getChildren().clear();
@@ -523,7 +460,8 @@ public class EmojiLienzoController implements Initializable {
           ClipboardContent content = new ClipboardContent();
           content.putString(iv.getImage().getUrl());
           db.setContent(content);
-          
+         
+          db.setDragView(iv.getImage(),40,40);
           event.consume();
       }
   });

@@ -8,8 +8,10 @@ package com.mycompany.emojimaker;
 import Classes.Emoji;
 import Classes.Proyecto;
 import TDASimplement.ArrayList;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.ResourceBundle;
 import java.util.Set;
 import javafx.event.ActionEvent;
@@ -79,17 +81,29 @@ public class GalleryWindowController implements Initializable {
                     }
                 });
                 this.trashCanIcon.setOnDragDropped(eh->{
-                   
-                    int cont=0;
+                   for (Proyecto pro: App.usuarioSeleccionado.getProyectos()){
+                       System.out.println("antes:"+pro);
+                   }
+                    int cont=-1;
                     String str=eh.getDragboard().getString();
                     for (int i=0; i<App.usuarioSeleccionado.getProyectos().size();i++){
-                        if (App.usuarioSeleccionado.getProyectos().get(i).getContent().getPortada().equals(proyectoSeleccionado.getContent().getPortada())){
+                        if (App.usuarioSeleccionado.getProyectos().get(i).getProName().equals(proyectoSeleccionado.getProName())){
                             cont=i;
                         }
                        
                     }
+            String[]  arra=App.usuarioSeleccionado.getProyectos().get(cont).getContent().getPortada().split(":");
+            String p=arra[1];
+             File file = new File(p);
+            try {
+                Files.delete(file.toPath());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
                     App.usuarioSeleccionado.getProyectos().remove(cont);
-                    
+                    for (Proyecto pro: App.usuarioSeleccionado.getProyectos()){
+                       System.out.println("despues:"+pro);
+                   }
                     llenarContenedor();
             try {
                 App.setRoot("galleryWindow");
@@ -98,6 +112,7 @@ public class GalleryWindowController implements Initializable {
             }
                     
                 }); 
+            proyectoSeleccionado=null;
     }    
     
 
@@ -156,6 +171,8 @@ public class GalleryWindowController implements Initializable {
           ClipboardContent content = new ClipboardContent();
           content.putString(imagen.getImage().getUrl());
           db.setContent(content);
+          db.setDragView(imagen.getImage(),20, 20);
+          db.setDragView(imagen.getImage());
           proyectoSeleccionado=p;
           event.consume();
       }

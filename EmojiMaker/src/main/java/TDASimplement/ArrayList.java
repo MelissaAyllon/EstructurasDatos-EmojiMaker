@@ -128,20 +128,19 @@ public class ArrayList<E> implements Serializable,List<E>, Iterable<E>{
 
     @Override
     public E remove(int index) {
-        E elemento=null;
-       
-                 for (int i=index; i<this.effectiveSize; i++){
-                     elemento=elements[i];
-       
-                         this.elements[i]=this.elements[i+1];
-                         
-                     
-                 }
-                 elements[effectiveSize-1]=null;
-                 effectiveSize--;
-             
-        
-        return elemento;
+         if (index >= effectiveSize || index < 0){
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        else{
+            //primero se remueve
+            E eleRemovido = elements[index];
+            elements[index] = null;
+            for(int i = index; i < effectiveSize;i++){
+                elements[i] = elements[i+1];
+            }
+            effectiveSize--;
+            return eleRemovido;
+        }
     }
 
     @Override
