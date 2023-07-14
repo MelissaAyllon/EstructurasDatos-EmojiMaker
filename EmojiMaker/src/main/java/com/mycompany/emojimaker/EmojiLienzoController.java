@@ -44,6 +44,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Iterator;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
@@ -149,7 +150,7 @@ public class EmojiLienzoController implements Initializable {
     private ArrayList<File> browsFiles;
     private ArrayList<File> extrasFiles;
     private String destinoPath="";
-  
+
     
     ObservableList<String> options = FXCollections.observableArrayList(
                 "ojos",
@@ -172,7 +173,8 @@ public class EmojiLienzoController implements Initializable {
         DraggableMaker.makeResizable(emojiBrows);
         DraggableMaker.makeResizable(emojiFace);
         DraggableMaker.makeResizable(emojiMouth);
-       
+        
+        
         //Llena opciones y evento segun seleccione el usuario
         this.comboBoxOpciones.setItems(options);
         comboBoxOpciones.setOnAction(eh->{
@@ -208,10 +210,19 @@ public class EmojiLienzoController implements Initializable {
              
                 Emoji e;
                 if (this.accesoryIv.getImage()!=null){
-                      e=new Emoji(emojiEyes.getImage().getUrl(), emojiMouth.getImage().getUrl(), emojiBrows.getImage().getUrl(), emojiFace.getImage().getUrl(),accesoryIv.getImage().getUrl(), portada.getUrl());
+                      e=new Emoji(emojiEyes.getImage().getUrl(),emojiEyes.getLayoutX(),emojiEyes.getLayoutY(),emojiEyes.getFitHeight(),emojiEyes.getFitWidth(),
+                              emojiMouth.getImage().getUrl(),emojiMouth.getLayoutX(),emojiMouth.getLayoutY(),emojiMouth.getFitHeight(),emojiMouth.getFitWidth(), 
+                              emojiBrows.getImage().getUrl(),emojiBrows.getLayoutX(),emojiBrows.getLayoutY(),emojiBrows.getFitHeight(),emojiBrows.getFitWidth(), 
+                              emojiFace.getImage().getUrl(),emojiFace.getLayoutX(),emojiFace.getLayoutY(),emojiFace.getFitHeight(),emojiFace.getFitWidth()
+                              ,accesoryIv.getImage().getUrl(),accesoryIv.getLayoutX(),accesoryIv.getLayoutY(), accesoryIv.getFitHeight(), accesoryIv.getFitWidth()
+                              , portada.getUrl());
                 }
                 else{
-                    e=new Emoji(emojiEyes.getImage().getUrl(), emojiMouth.getImage().getUrl(), emojiBrows.getImage().getUrl(), emojiFace.getImage().getUrl(), portada.getUrl());
+                    e=new Emoji(emojiEyes.getImage().getUrl(),emojiEyes.getLayoutX(),emojiEyes.getLayoutY(),emojiEyes.getFitHeight(),emojiEyes.getFitWidth(),
+                            emojiMouth.getImage().getUrl(),emojiMouth.getLayoutX(),emojiMouth.getLayoutY(),emojiMouth.getFitHeight(),emojiMouth.getFitWidth(), 
+                            emojiBrows.getImage().getUrl(),emojiBrows.getLayoutX(),emojiBrows.getLayoutY(),emojiBrows.getFitHeight(),emojiBrows.getFitWidth(), 
+                            emojiFace.getImage().getUrl(),emojiFace.getLayoutX(),emojiFace.getLayoutY(),emojiFace.getFitHeight(),emojiFace.getFitWidth(),
+                            portada.getUrl());
                 }
                
                 
@@ -286,8 +297,7 @@ public class EmojiLienzoController implements Initializable {
                 this.ivSelected.setImage(i);
                 
                 nodoF=nodoF.getNext();
-                
-                
+
             }
     }
     //metodo boton previous
@@ -381,7 +391,7 @@ public class EmojiLienzoController implements Initializable {
                 this.selectedList=this.ojos;
                 this.directoriosSelected=this.ojosFiles;
                 this.destinoPath="C:\\Users\\USUARIO\\OneDrive\\Escritorio\\ProyectoEDD\\EstructurasDatos-EmojiMaker\\EmojiMaker\\src\\main\\java\\imagenes\\eyes";
-                
+               
             }
              if (seleccionado.equals("boca")){
                 cargarFeatures(bocas);
@@ -594,7 +604,12 @@ public class EmojiLienzoController implements Initializable {
        ImageView cejasUrl = this.getEmojiBrows();
        ImageView caraUrl = this.getEmojiFace();
        ImageView accUrl=this.getAccesoryIv();
-       Emoji emoji = new Emoji(ojosUrl.getImage().getUrl(),bocaUrl.getImage().getUrl(),cejasUrl.getImage().getUrl(),caraUrl.getImage().getUrl(),accUrl.getImage().getUrl(),portada.getUrl());
+       Emoji emoji=new Emoji(emojiEyes.getImage().getUrl(),emojiEyes.getLayoutX(),emojiEyes.getLayoutY(),emojiEyes.getFitHeight(),emojiEyes.getFitWidth(),
+                              emojiMouth.getImage().getUrl(),emojiMouth.getLayoutX(),emojiMouth.getLayoutY(),emojiMouth.getFitHeight(),emojiMouth.getFitWidth(), 
+                              emojiBrows.getImage().getUrl(),emojiBrows.getLayoutX(),emojiBrows.getLayoutY(),emojiBrows.getFitHeight(),emojiBrows.getFitWidth(), 
+                              emojiFace.getImage().getUrl(),emojiFace.getLayoutX(),emojiFace.getLayoutY(),emojiFace.getFitHeight(),emojiFace.getFitWidth()
+                              ,accesoryIv.getImage().getUrl(),accesoryIv.getLayoutX(),accesoryIv.getLayoutY(), accesoryIv.getFitHeight(), accesoryIv.getFitWidth()
+                              , portada.getUrl());
        //Creo el proyecto
        Proyecto proy = new Proyecto(nombreProyecto,emoji);
        
@@ -609,7 +624,11 @@ public class EmojiLienzoController implements Initializable {
 //       System.out.println(this.getEmojiMouth().toString());
 //       System.out.println(this.getEmojiBrows().toString());
 //       System.out.println(this.getEmojiFace().toString());
-       Emoji emoji = new Emoji(ojosUrl.getImage().getUrl(),bocaUrl.getImage().getUrl(),cejasUrl.getImage().getUrl(),caraUrl.getImage().getUrl(),portada.getUrl());
+       Emoji emoji = new Emoji(emojiEyes.getImage().getUrl(),emojiEyes.getLayoutX(),emojiEyes.getLayoutY(),emojiEyes.getFitHeight(),emojiEyes.getFitWidth(),
+                            emojiMouth.getImage().getUrl(),emojiMouth.getLayoutX(),emojiMouth.getLayoutY(),emojiMouth.getFitHeight(),emojiMouth.getFitWidth(), 
+                            emojiBrows.getImage().getUrl(),emojiBrows.getLayoutX(),emojiBrows.getLayoutY(),emojiBrows.getFitHeight(),emojiBrows.getFitWidth(), 
+                            emojiFace.getImage().getUrl(),emojiFace.getLayoutX(),emojiFace.getLayoutY(),emojiFace.getFitHeight(),emojiFace.getFitWidth(),
+                            portada.getUrl());
        //Creo el proyecto
        Proyecto proy = new Proyecto(nombreProyecto,emoji);
        
@@ -627,10 +646,30 @@ public class EmojiLienzoController implements Initializable {
                 Image caraIm =new Image(proy.getContent().getFace_url());
                 Image accIm = new Image(proy.getContent().getAccesory());
                 emojiEyes.setImage(ojosIm);
+                emojiEyes.setLayoutX(proy.getContent().getEyesX());
+                emojiEyes.setLayoutY(proy.getContent().getEyesY());
+                emojiEyes.setFitHeight(proy.getContent().getEyesH());
+                emojiEyes.setFitWidth(proy.getContent().getEyesW());
                 emojiMouth.setImage(bocaIm);
+                emojiMouth.setLayoutX(proy.getContent().getMouthX());
+                emojiMouth.setLayoutY(proy.getContent().getMouthY());
+                emojiMouth.setFitHeight(proy.getContent().getMouthH());
+                emojiMouth.setFitWidth(proy.getContent().getMouthW());
                 emojiBrows.setImage(cejasIm);
+                emojiBrows.setLayoutX(proy.getContent().getBrowsX());
+                emojiBrows.setLayoutY(proy.getContent().getBrowsY());
+                emojiBrows.setFitHeight(proy.getContent().getBrowsH());
+                emojiBrows.setFitWidth(proy.getContent().getBrowsW());
                 emojiFace.setImage(caraIm);
+                emojiFace.setLayoutX(proy.getContent().getFaceX());
+                emojiFace.setLayoutY(proy.getContent().getFaceY());
+                emojiFace.setFitHeight(proy.getContent().getFaceH());
+                emojiFace.setFitWidth(proy.getContent().getFaceW());
                 accesoryIv.setImage(accIm);
+                accesoryIv.setLayoutX(proy.getContent().getAccX());
+                accesoryIv.setLayoutY(proy.getContent().getAccY());
+                accesoryIv.setFitHeight(proy.getContent().getAccH());
+                accesoryIv.setFitWidth(proy.getContent().getAccW());
 
             titulotxt.setText(proy.getProName());
             }
@@ -640,9 +679,25 @@ public class EmojiLienzoController implements Initializable {
             Image caraIm =new Image(proy.getContent().getFace_url());
 
             emojiEyes.setImage(ojosIm);
-            emojiMouth.setImage(bocaIm);
-            emojiBrows.setImage(cejasIm);
-            emojiFace.setImage(caraIm);
+                emojiEyes.setLayoutX(proy.getContent().getEyesX());
+                emojiEyes.setLayoutY(proy.getContent().getEyesY());
+                emojiEyes.setFitHeight(proy.getContent().getEyesH());
+                emojiEyes.setFitWidth(proy.getContent().getEyesW());
+                emojiMouth.setImage(bocaIm);
+                emojiMouth.setLayoutX(proy.getContent().getMouthX());
+                emojiMouth.setLayoutY(proy.getContent().getMouthY());
+                emojiMouth.setFitHeight(proy.getContent().getMouthH());
+                emojiMouth.setFitWidth(proy.getContent().getMouthW());
+                emojiBrows.setImage(cejasIm);
+                emojiBrows.setLayoutX(proy.getContent().getBrowsX());
+                emojiBrows.setLayoutY(proy.getContent().getBrowsY());
+                emojiBrows.setFitHeight(proy.getContent().getBrowsH());
+                emojiBrows.setFitWidth(proy.getContent().getBrowsW());
+                emojiFace.setImage(caraIm);
+                emojiFace.setLayoutX(proy.getContent().getFaceX());
+                emojiFace.setLayoutY(proy.getContent().getFaceY());
+                emojiFace.setFitHeight(proy.getContent().getFaceH());
+                emojiFace.setFitWidth(proy.getContent().getFaceW());
             //faltaria el accesorio++++=+++++++++
             
 

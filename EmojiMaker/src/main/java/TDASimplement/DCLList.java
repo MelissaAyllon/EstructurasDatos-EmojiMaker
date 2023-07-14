@@ -101,7 +101,7 @@ public class DCLList<E> implements List<E>, Iterable<E>, Serializable{
     public NodeDCLL getNode(){
         return this.last.getNext();
     }
-    public NodeDCLL getNodeByContent(E content){
+    public  NodeDCLL getNodeByContent(E content){
         NodeDCLL nodo=null;
         NodeDCLL<E> nodoViajero=this.last;
         if (this.last.getContent().equals(content)){

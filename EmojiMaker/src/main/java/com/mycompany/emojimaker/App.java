@@ -11,7 +11,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -21,14 +20,18 @@ import java.io.ObjectOutputStream;
  */
 public class App extends Application {
   public static ArrayList<Usuario> usuarios=deserInfo();
+//    public static ArrayList<Usuario> usuarios= new ArrayList<>();
     private static Scene scene;
     public static Usuario usuarioSeleccionado=null;
-
+    
     @Override
-    public void start(Stage stage) throws IOException {      
+    public void start(Stage stage) throws IOException {     
+//        Usuario u=new Usuario("1234", "1234");
+//        usuarios.addLast(u);
         scene = new Scene(loadFXML("welcomeWindow"), 700, 600);
         stage.setScene(scene);
         stage.show();
+        
 
     }
 
