@@ -4,6 +4,17 @@
  */
 package pruebas;
 
+import Classes.Accesory;
+import Classes.AccesoryDecorator;
+import Classes.AccesoryEmojiBuilder;
+import Classes.Brow;
+import Classes.Decorator;
+import Classes.Director;
+import Classes.Emoji;
+import Classes.EmojiBuilder;
+import Classes.Eye;
+import Classes.Face;
+import Classes.Mouth;
 import TDASimplement.ArrayList;
 import TDASimplement.DCLList;
 
@@ -71,7 +82,22 @@ public class Main {
             System.out.println("Hola");
             //pasar a imagen
         }
-
+        
+        Director d=Director.getInstance("Director");
+        System.out.println(d.getDirName());
+        Director dNuevo=Director.getInstance("DirNuevo");
+        System.out.println(dNuevo.getDirName());
+        EmojiBuilder eb=new EmojiBuilder();
+        d.constructEmoji(eb, new Eye(), new Mouth(), new Brow(), new Face(), "");
+        Emoji e=eb.getResult(); 
+        //Imprime el tipo de emoji
+        e.printType();
+        //Verifica si el emoji tiene accesorio 
+        System.out.println(e.hasAccesory());
+        //Lo paso al decorador
+        Decorator decor=new AccesoryDecorator(e,new Accesory());
+        //Emoji luego de aplicarle el decorador
+        System.out.println(e.hasAccesory());
     
     }
     //Se ha cambiado el arrayList a el nuestro en el import 

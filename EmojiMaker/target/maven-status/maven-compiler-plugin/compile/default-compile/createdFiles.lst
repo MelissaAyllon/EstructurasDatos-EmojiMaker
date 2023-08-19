@@ -1,10 +1,6 @@
 TDASimplement\ArrayList.class
 Classes\Proyecto.class
-Classes\ColeccionImagenes.class
-com\mycompany\emojimaker\GalleryWindowController.class
-com\mycompany\emojimaker\EmojiLienzoController.class
 TDASimplement\DCLList.class
-com\mycompany\emojimaker\App.class
 TDASimplement\DCLList$1.class
 Classes\Usuario.class
 TDASimplement\NodeDCLL.class
@@ -12,8 +8,6 @@ pruebas\Main.class
 module-info.class
 TDASimplement\List.class
 pruebas\PruebaIterators.class
-com\mycompany\emojimaker\GalleryWindowController$1.class
 TDASimplement\ArrayList$1.class
 Classes\Emoji.class
-com\mycompany\emojimaker\WelcomeWindowController.class
 Classes\CargarColeccion.class
