@@ -4,6 +4,7 @@
  */
 package com.mycompany.emojimaker;
 
+import Classes.Director;
 import Classes.Emoji;
 import Classes.Proyecto;
 import TDASimplement.ArrayList;
@@ -133,7 +134,7 @@ public class EmojiLienzoController implements Initializable {
      @FXML
      private TextField titulotxt;
  
-   
+     
      
     private DCLList<ImageView> ojos=new DCLList<>();
     private DCLList<ImageView> bocas=new DCLList<>();
@@ -150,7 +151,8 @@ public class EmojiLienzoController implements Initializable {
     private ArrayList<File> browsFiles;
     private ArrayList<File> extrasFiles;
     private String destinoPath="";
-
+    private ExportStrategy estrategiaSesion;
+    private ComboBox comboBoxStrategias;
     
     ObservableList<String> options = FXCollections.observableArrayList(
                 "ojos",
@@ -160,7 +162,12 @@ public class EmojiLienzoController implements Initializable {
                 "boca"
             
         );
-    
+    ObservableList<String> optionsEstrategia = FXCollections.observableArrayList(
+                "Documento",
+                "Imagen"
+            
+        );
+    private Director d;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        ojosFiles=llenarListsOjos();
@@ -173,14 +180,21 @@ public class EmojiLienzoController implements Initializable {
         DraggableMaker.makeResizable(emojiBrows);
         DraggableMaker.makeResizable(emojiFace);
         DraggableMaker.makeResizable(emojiMouth);
-        
+        d=new Director();
         
         //Llena opciones y evento segun seleccione el usuario
         this.comboBoxOpciones.setItems(options);
         comboBoxOpciones.setOnAction(eh->{
             startComboBox();
         });
-        
+        comboBoxStrategias.setItems(optionsEstrategia);
+        comboBoxOpciones.setOnAction(eh->{
+           if (this.comboBoxOpciones.getValue().equals("Documento")){
+               this.estrategiaSesion=new ExportDocument();
+           }else{
+               this.estrategiaSesion=new ExportImage();
+           }
+        });
         //Realiza el cambio segun sea hacia delante o atras
         this.btnNext.setOnAction(eh->{
             runNext();
@@ -263,7 +277,7 @@ public class EmojiLienzoController implements Initializable {
                 String ruta=selectedDirectory.getAbsolutePath();
                 System.out.println(ruta);
                 if (selectedDirectory != null) {
-                    imagenDirectorio(emojiBlock,titulotxt.getText(),ruta);
+                   estrategiaSesion.exportEmoji(emojiBlock, "nombreProyecto", ruta);
                     Alert a=new Alert(Alert.AlertType.CONFIRMATION);
                     a.setContentText("Imagen guaradada en: "+selectedDirectory.getPath());
                     a.showAndWait();
@@ -275,6 +289,8 @@ public class EmojiLienzoController implements Initializable {
             }
         
         });
+            
+            
         
       }
          

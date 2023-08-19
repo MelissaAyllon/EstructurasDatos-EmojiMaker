@@ -43,14 +43,14 @@ import javafx.scene.shape.Rectangle;
 
 public class DraggableMaker {
     public interface OnDragResizeEventListener {
-        void onDrag(Node node, double x, double y, double h, double w);
+        void onDrag(Node node, RectangleDimensions rectangle);
 
-        void onResize(Node node, double x, double y, double h, double w);
+        void onResize(Node node, RectangleDimensions rectangle);
     }
 
     private static final OnDragResizeEventListener defaultListener = new OnDragResizeEventListener() {
         @Override
-        public void onDrag(Node node, double x, double y, double h, double w) {
+        public void onDrag(Node node, RectangleDimensions rectangle) {
             /*
             // TODO find generic way to get parent width and height of any node
             // can perform out of bounds check here if you know your parent size
@@ -59,11 +59,11 @@ public class DraggableMaker {
             if (x < 0) x = 0;
             if (y < 0) y = 0;
             */
-            setNodeSize(node, x, y, h, w);
+            setNodeSize(node, rectangle);
         }
 
         @Override
-        public void onResize(Node node, double x, double y, double h, double w) {
+        public void onResize(Node node, RectangleDimensions rectangle) {
             /*
             // TODO find generic way to get parent width and height of any node
             // can perform out of bounds check here if you know your parent size
@@ -72,20 +72,20 @@ public class DraggableMaker {
             if (x < 0) x = 0;
             if (y < 0) y = 0;
             */
-            setNodeSize(node, x, y, h, w);
+            setNodeSize(node, rectangle);
         }
 
-        private void setNodeSize(Node node, double x, double y, double h, double w) {
-            node.setLayoutX(x);
-            node.setLayoutY(y);
+        private void setNodeSize(Node node, RectangleDimensions rectangle) {
+            node.setLayoutX(rectangle.getX());
+            node.setLayoutY(rectangle.getY());
             // TODO find generic way to set width and height of any node
             // here we cant set height and width to node directly.
             // or i just cant find how to do it,
             // so you have to wright resize code anyway for your Nodes...
             //something like this
             if (node instanceof ImageView) {
-                ((ImageView) node).setFitWidth(w);
-                ((ImageView) node).setFitHeight(h);
+                ((ImageView) node).setFitWidth(rectangle.getWidth());
+                ((ImageView) node).setFitHeight(rectangle.getHigh());
             } 
         }
     };
@@ -214,49 +214,45 @@ public class DraggableMaker {
         if (listener != null) {
             double mouseX = parentX(event.getX());
             double mouseY = parentY(event.getY());
+            RectangleDimensions rectangle;
             if (state == S.DRAG) {
-                listener.onDrag(node, mouseX - clickX, mouseY - clickY, nodeH, nodeW);
+                rectangle = new RectangleDimensions(mouseX - clickX, mouseY - clickY, nodeH, nodeW);
+                listener.onDrag(node, rectangle);
             } else if (state != S.DEFAULT) {
                 //resizing
-                double newX = nodeX;
-                double newY = nodeY;
-                double newH = nodeH;
-                double newW = nodeW;
-
+                rectangle = new RectangleDimensions();
                 // Right Resize
                 if (state == S.E_RESIZE || state == S.NE_RESIZE || state == S.SE_RESIZE) {
-                    newW = mouseX - nodeX;
+                    rectangle.setX(mouseX - nodeX);
                 }
                 // Left Resize
                 if (state == S.W_RESIZE || state == S.NW_RESIZE || state == S.SW_RESIZE) {
-                    newX = mouseX;
-                    newW = nodeW + nodeX - newX;
+                    rectangle.setWidth(nodeW + nodeX - rectangle.getX());
                 }
 
                 // Bottom Resize
                 if (state == S.S_RESIZE || state == S.SE_RESIZE || state == S.SW_RESIZE) {
-                    newH = mouseY - nodeY;
+                    rectangle.setHigh(mouseY - nodeY);
                 }
                 // Top Resize
                 if (state == S.N_RESIZE || state == S.NW_RESIZE || state == S.NE_RESIZE) {
-                    newY = mouseY;
-                    newH = nodeH + nodeY - newY;
+                    rectangle.setHigh(nodeH + nodeY - rectangle.getY());
                 }
 
                 //min valid rect Size Check
-                if (newW < MIN_W) {
+                if (rectangle.getWidth() < MIN_W) {
                     if (state == S.W_RESIZE || state == S.NW_RESIZE || state == S.SW_RESIZE)
-                        newX = newX - MIN_W + newW;
-                    newW = MIN_W;
+                        rectangle.setX(rectangle.getX()- MIN_W + rectangle.getWidth());
+                    rectangle.setWidth(MIN_W);
                 }
 
-                if (newH < MIN_H) {
+                if (rectangle.getHigh() < MIN_H) {
                     if (state == S.N_RESIZE || state == S.NW_RESIZE || state == S.NE_RESIZE)
-                        newY = newY + newH - MIN_H;
-                    newH = MIN_H;
+                        rectangle.setY(rectangle.getY() + rectangle.getHigh() - MIN_H);
+                    rectangle.setHigh(MIN_H);
                 }
 
-                listener.onResize(node, newX, newY, newH, newW);
+                listener.onResize(node, rectangle);
             }
         }
     }
